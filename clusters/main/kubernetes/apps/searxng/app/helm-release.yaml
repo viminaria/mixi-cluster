@@ -2,14 +2,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: kubernetes-dashboard
-  namespace: kubernetes-dashboard
+  name: searxng
+  namespace: searxng
 spec:
   interval: 15m
   chart:
     spec:
-      chart: kubernetes-dashboard
-      version: 3.2.9
+      chart: searxng
+      version: 10.13.17
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -17,8 +17,6 @@ spec:
       interval: 15m
   timeout: 20m
   maxHistory: 3
-  driftDetection:
-    mode: warn
   install:
     createNamespace: true
     remediation:
@@ -32,20 +30,20 @@ spec:
   values:
     global:
       stopAll: false
-    service:
+    securityContext:
+      privileged: true
+    ingress:
       main:
-        type: LoadBalancer
-        loadBalancerIP: ${DASHBOARD_IP}
+        enabled: true
+        ingressClassName: internal
         integrations:
-          metallb:
+          certManager:
             enabled: true
-        ports:
-          main:
-            port: 80
-    podOptions:
-      enableServiceLinks: true
-      hostUsers: true
-    configmap:
-      kubernetes-dashboard-settings:
-        data:
-          settings: '{"itemsPerPage":100,"defaultNamespace":"_all"}'
+            certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: search.${DOMAIN_0}
+    persistence:
+      config:
+        type: nfs
+        path: ${SEARXNG_NFS_PATH}
+        server: ${PROXMOX_IP}

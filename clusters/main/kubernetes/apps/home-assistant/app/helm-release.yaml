@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.truechartsoci.org
+      chart: home-assistant
+      version: 28.19.8
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  values:
+    global:
+      stopAll: false
+    service:
+      main:
+        type: ClusterIP
+        ports:
+          main:
+            port: 8123
+    homeassistant:
+      trusted_proxies: ["172.16.0.0/16"]
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: ha.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          traefik:
+            enabled: false
+            #auth
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+    persistence:
+      config:
+        type: nfs
+        path: ${HOMEASSISTANT_NFS_PATH}
+        server: ${PROXMOX_IP}

@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: viminariacom-static
+  namespace: viminariacom-static
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: static-web-server
+      version: 7.16.5
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        hosts:
+          - host: "www.${DOMAIN_0}"
+            paths:
+              - overrideService:
+                  name: "main"
+                  port: 38080
+                path: "/"
+                pathType: "Prefix"
+        integrations:
+          traefik:
+            enabled: false
+            #auth
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+    persistence:
+      config:
+        enabled: true
+        type: nfs
+        path: ${VIMINARIACOM_NFS_PATH}
+        server: ${PROXMOX_IP}
