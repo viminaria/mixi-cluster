@@ -6,7 +6,7 @@ resources:
   - cloudflareddns/ks.yaml
   - ozrates-static/ks.yaml
   - viminariacom-static/ks.yaml
-  - wg-easy/ks.yaml
+  # - wg-easy/ks.yaml
   - minecraft-java/ks.yaml
   - minecraft-router/ks.yaml
   - nextcloud/ks.yaml
