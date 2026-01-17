@@ -1,0 +1,9 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "github>trueforge-org/truecharts//.github/renovate/main.json5",
+    "github>viminaria/mixi-cluster//.github/custom.json5",
+    "github>viminaria/mixi-cluster//.github/kubectl.json5"
+  ]
+}
