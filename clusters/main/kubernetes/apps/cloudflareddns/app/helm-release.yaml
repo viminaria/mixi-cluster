@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudflareddns
+  namespace: cloudflareddns
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: cloudflareddns
+      version: 12.14.10
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    image:
+      repository: ghcr.io/hotio/cloudflareddns
+      pullPolicy: IfNotPresent
+      tag: latest@sha256:4a32d1d4c9e6d6d9a55558251af3e36f323f1f585468cfb345438f15609a25ee
+    securityContext:
+      container:
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false
+        runAsUser: 0
+        runAsGroup: 0
+    cloudflareddns:
+      user: ${DOMAIN_0_EMAIL}
+      api_token: ${DOMAIN_0_CLOUDFLARE_TOKEN}
+      interval: 300
+      detect_mode: dig-whoami.cloudflare
+      detect:override: ""
+      log_level: 3
+      host_zone_record:
+        - domain: ${DDNS_URL}
+          zone: ${ZONE_ID}
+          record: A
+        - domain: mc.${DOMAIN_0}
+          zone: ${ZONE_ID}
+          record: A

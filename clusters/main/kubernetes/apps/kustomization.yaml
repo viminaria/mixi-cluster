@@ -4,3 +4,4 @@ resources:
   - kubernetes-dashboard/ks.yaml
   - searxng/ks.yaml
   - wg-easy/ks.yaml
+  - cloudflareddns/ks.yaml
