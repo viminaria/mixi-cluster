@@ -1,0 +1,49 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: searxng
+  namespace: searxng
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: searxng
+      version: 10.13.16
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    global:
+      stopAll: false
+    securityContext:
+      privileged: true
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+        hosts:
+          - host: search.${DOMAIN_0}
+    persistence:
+      config:
+        type: nfs
+        path: ${SEARXNG_NFS_PATH}
+        server: ${PROXMOX_IP}
