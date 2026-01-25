@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minecraft-router
+  namespace: minecraft
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: minecraft-router
+      version: 2.20.3
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    global:
+      stopAll: false
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: ${MINECRAFT_IP}
+        integrations:
+          metallb:
+            enabled: true
+        ports:
+          main:
+            enabled: true
+            protocol: tcp
+            port: 25565
+          query:
+            enabled: true
+            protocol: udp
+            port: 25565
+
+    mcrouter:
+      default: minecraft-java.minecraft-java.svc.cluster.local:25565
+      mappings:
+        - mc.${DOMAIN_0}=minecraft-java.minecraft-java.svc.cluster.local:25565

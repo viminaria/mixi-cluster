@@ -5,3 +5,11 @@ resources:
   - searxng/ks.yaml
   - wg-easy/ks.yaml
   - cloudflareddns/ks.yaml
+  - borealis/ks.yaml
+  - minecraft-java/ks.yaml
+  - minecraft-router/ks.yaml
+  - ollama/ks.yaml
+  - ozrates-static/ks.yaml
+  - spoolman/ks.yaml
+  - uptime-kuma/ks.yaml
+  - viminariacom-static/ks.yaml
