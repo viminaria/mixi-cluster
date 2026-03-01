@@ -4,6 +4,10 @@ kind: HelmRelease
 metadata:
   name: frigate
   namespace: frigate
+image:   
+  repository: ghcr.io/blakeblackshear/frigate
+  pullPolicy: IfNotPresent
+  tag: 0.17.0-tensorrt@sha256:ff5c5e062582a1263fb1639563f2d2af555551084ab09a30769cbcf36a759ad9
 spec:
   interval: 15m
   chart:
