@@ -13,4 +13,4 @@ resources:
   - spoolman/ks.yaml
   - uptime-kuma/ks.yaml
   - viminariacom-static/ks.yaml
-  - frigate/ks.yaml
+  # - frigate/ks.yaml
