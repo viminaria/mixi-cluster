@@ -58,6 +58,11 @@ spec:
                   nvidia.com/gpu: 1
           runtimeClassName: "nvidia"
     persistence:
+      config:
+        enabled: true
+        type: nfs
+        path: ${FRIGATE_CONFIG_PATH}
+        server: ${PROXMOX_IP}
       media:
         enabled: true
         type: nfs
