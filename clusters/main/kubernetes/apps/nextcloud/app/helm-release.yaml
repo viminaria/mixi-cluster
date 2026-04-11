@@ -1,50 +1,72 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: nextcloud
   namespace: nextcloud
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://charts.truechartsoci.org
       chart: nextcloud
       version: 43.0.11
       sourceRef:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
-      interval: 15m
-  timeout: 20m
-  maxHistory: 3
+      interval: 5m
   install:
     createNamespace: true
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
-    cleanupOnFail: true
+    crds: CreateReplace
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     global:
       stopAll: false
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        hosts:
+          - host: nextcloud.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+        integrations:
+          traefik:
+            enabled: false
+          #auth
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
     persistence:
       data:
         enabled: true
         type: nfs
         path: ${NEXTCLOUD_NFS_PATH}
         server: ${PROXMOX_IP}
-
-    ingress:
+    nextcloud:
+      collabora:
         enabled: true
-        ingressClassName: external
-        hosts:
-          - host: nextcloud.${DOMAIN_0}
-        integrations:
-          traefik:
-            enabled: false
-          certManager:
-            enabled: true
-            certificateIssuer: domain-0-le-prod
+      credentials:
+        initialAdminPassword: "${NEXTCLOUD_PASSWORD}"
+        initialAdminUser: "${NEXTCLOUD_USER}"
+      general:
+        accessIP: ${NGINX_EXTERNAL_IP}
+        default_phone_region: FI
+      previews:
+        providers:
+        - BMP
+        - GIF
+        - JPEG
+        - Krita
+        - MarkDown
+        - MP3
+        - OpenDocument
+        - PNG
+        - TXT
+        - XBitmap
