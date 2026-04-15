@@ -16,3 +16,4 @@ resources:
   - frigate/ks.yaml
   - grafana/ks.yaml
   - nextcloud/ks.yaml
+  - fileshelter/ks.yaml
