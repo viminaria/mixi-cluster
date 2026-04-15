@@ -50,3 +50,6 @@ spec:
       config2:
         enabled: true
         mountPath: /etc
+        type: emptyDir
+        readOnly: false
+        targetSelectAll: true
