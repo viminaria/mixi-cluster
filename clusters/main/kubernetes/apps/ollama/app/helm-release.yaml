@@ -71,6 +71,6 @@ spec:
               resources:
                 limits:
                   cpu: 10000m
-                  memory: 16Gi
-                  nvidia.com/gpu: 1
+                  memory: 20Gi
+                  nvidia.com/gpu: 2
           runtimeClassName: "nvidia"
