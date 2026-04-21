@@ -69,9 +69,9 @@ spec:
                 SNOOPER_ENABLED: "false"
                 OVERRIDE_SERVER_PROPERTIES: "true"
                 DUMP_SERVER_PROPERTIES: "true"
-                VERSION: "1.21.4"
+                VERSION: "26.1.2"
                 TYPE: "FABRIC"
-                DIFFICULTY: "easy"
+                DIFFICULTY: "hard"
                 MAX_PLAYERS: 10
                 MAX_WORLD_SIZE: 50000
                 ALLOW_NETHER: "true"
