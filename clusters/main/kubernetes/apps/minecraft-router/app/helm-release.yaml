@@ -49,6 +49,6 @@ spec:
             port: 25565
 
     mcrouter:
-      default: minecraft-java.minecraft-java.svc.cluster.local:25565
+      default: minecraft-java.minecraft.svc.cluster.local:25565
       mappings:
-        - mc.${DOMAIN_0}=minecraft-java.minecraft-java.svc.cluster.local:25565
+        - mc.${DOMAIN_0}=minecraft-java.minecraft.svc.cluster.local:25565
