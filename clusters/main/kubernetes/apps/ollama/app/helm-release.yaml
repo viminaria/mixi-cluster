@@ -68,6 +68,9 @@ spec:
         podSpec:
           containers:
             main:
+              env:
+                OLLAMA_FLASH_ATTENTION: 1
+                OLLAMA_GPU_OVERHEAD: 1073741824
               resources:
                 limits:
                   cpu: 10000m
