@@ -48,7 +48,9 @@ spec:
           runtimeClassName: nvidia
           containers:
             main:
-              command: "vllm serve google/gemma-4-31b-it --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024 --temperature 1.0 --top_p=0.95 --top_k=64"
+              command: 
+                - "/bin/sh"
+                - "-c vllm serve google/gemma-4-31b-it --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024 --temperature 1.0 --top_p=0.95 --top_k=64"
               env:
                 HF_TOKEN: ${HF_TOKEN}
                 VLLM_MAIN_CUDA_VERSION: 12.2
