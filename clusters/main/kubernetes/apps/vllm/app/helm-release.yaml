@@ -41,7 +41,7 @@ spec:
       main:
         ports:
           main:
-            port: 11434
+            port: 8000
     workload:
       main:
         podSpec:
