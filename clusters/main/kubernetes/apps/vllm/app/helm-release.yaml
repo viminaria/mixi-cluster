@@ -50,6 +50,7 @@ spec:
             main:
               env:
                 HF_TOKEN: ${HF_TOKEN}
+                VLLM_MAIN_CUDA_VERSION: 12.2
               resources:
                 limits:
                   nvidia.com/gpu: 2
