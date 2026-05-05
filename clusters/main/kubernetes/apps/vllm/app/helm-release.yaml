@@ -28,9 +28,9 @@ spec:
     global:
       stopAll: false
     image:
-      repository: vllm/vllm-openai
+      repository: tytn/vllm-openai
       pullPolicy: IfNotPresent
-      tag: latest-cu129-ubuntu2404
+      tag: cu12.2
     securityContext:
       container:
         runAsNonRoot: false
@@ -50,7 +50,7 @@ spec:
             main:
               env:
                 HF_TOKEN: ${HF_TOKEN}
-                VLLM_MAIN_CUDA_VERSION: 12.9
+                VLLM_MAIN_CUDA_VERSION: 12.2
               resources:
                 limits:
                   nvidia.com/gpu: 2
