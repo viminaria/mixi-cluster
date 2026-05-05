@@ -30,7 +30,7 @@ spec:
     image:
       repository: vllm/vllm-openai
       pullPolicy: IfNotPresent
-      tag: latest
+      tag: 0.20.1-cu129-ubuntu2404@sha256-d56fc6c52ada70ebf3329f7571d2f317084da60842a1de517106eb27069f8bc2
     securityContext:
       container:
         runAsNonRoot: false
