@@ -48,8 +48,6 @@ spec:
           runtimeClassName: nvidia
           containers:
             main:
-              env:
-                HF_TOKEN: ${HF_TOKEN}
               resources:
                 limits:
                   nvidia.com/gpu: 2
@@ -70,7 +68,8 @@ spec:
             certificateIssuer: domain-0-le-prod
     persistence:
       models:
-        enabled: true
         type: nfs
+        enabled: true
+        mountPath: /models
         path: ${LLAMA_NFS_PATH}
         server: ${PROXMOX_IP}
