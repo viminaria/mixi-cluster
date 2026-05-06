@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: llama_cpp
-  namespace: llama_cpp
+  name: llama-cpp
+  namespace: llama-cpp
 spec:
   interval: 30m
   chart:
