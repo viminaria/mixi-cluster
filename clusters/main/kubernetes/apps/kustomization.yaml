@@ -18,3 +18,4 @@ resources:
   - nextcloud/ks.yaml
   - home-assistant/ks.yaml
   # - vllm/ks.yaml
+  - llama_cpp/ks.yaml

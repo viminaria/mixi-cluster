@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: vllm
-  namespace: vllm
+  name: llama_cpp
+  namespace: llama_cpp
 spec:
   interval: 30m
   chart:
@@ -28,9 +28,9 @@ spec:
     global:
       stopAll: false
     image:
-      repository: tytn/vllm-openai
+      repository: ggml-org/llama.cpp
       pullPolicy: IfNotPresent
-      tag: cu12.2
+      tag: full-cuda13
     securityContext:
       container:
         runAsNonRoot: false
@@ -48,12 +48,8 @@ spec:
           runtimeClassName: nvidia
           containers:
             main:
-              command: 
-                - "/bin/sh"
-                - "-c vllm serve google/gemma-4-31b-it --trust-remote-code --enable-chunked-prefill --max_num_batched_tokens 1024 --temperature 1.0 --top_p=0.95 --top_k=64"
               env:
                 HF_TOKEN: ${HF_TOKEN}
-                VLLM_MAIN_CUDA_VERSION: 12.2
               resources:
                 limits:
                   nvidia.com/gpu: 2
@@ -62,7 +58,7 @@ spec:
         enabled: true
         ingressClassName: "internal"
         hosts:
-          - host: vllm.${DOMAIN_0}
+          - host: llama.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
@@ -75,4 +71,6 @@ spec:
     persistence:
       models:
         enabled: true
-        mountPath: /root/.cache/huggingface
+        type: nfs
+        path: ${LLAMA_NFS_PATH}
+        server: ${PROXMOX_IP}
