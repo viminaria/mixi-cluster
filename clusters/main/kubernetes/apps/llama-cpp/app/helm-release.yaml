@@ -28,7 +28,7 @@ spec:
     global:
       stopAll: false
     image:
-      repository: ggml-org/llama.cpp
+      repository: ghcr.io/ggml-org/llama.cpp
       pullPolicy: IfNotPresent
       tag: full-cuda13
     securityContext:
