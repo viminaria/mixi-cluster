@@ -50,9 +50,7 @@ spec:
             main:
               env:
                 - HF_TOKEN: ${HF_TOKEN}
-              args:
-                - p: "8000:8000"
-                - model: "Qwen/Qwen3.6-35b-A3B"
+              args: "-p 8000:8000 --model Qwen/Qwen3.6-35b-A3B"
               resources:
                 limits:
                   nvidia.com/gpu: 2
