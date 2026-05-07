@@ -30,7 +30,7 @@ spec:
     image:
       repository: vllm/vllm-openai
       pullPolicy: IfNotPresent
-      tag: gemma4-0505-cu130
+      tag: latest
     securityContext:
       container:
         runAsNonRoot: false
@@ -45,11 +45,14 @@ spec:
     workload:
       main:
         podSpec:
-          env:
-            - HF_TOKEN: ${HF_TOKEN}
           runtimeClassName: nvidia
           containers:
             main:
+              env:
+                - HF_TOKEN: ${HF_TOKEN}
+              args:
+                - "-p 8000:8000"
+                - "--model= Qwen/Qwen3.6-35b-A3B"
               resources:
                 limits:
                   nvidia.com/gpu: 2
