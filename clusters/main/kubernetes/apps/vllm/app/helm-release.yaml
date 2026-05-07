@@ -57,9 +57,11 @@ spec:
                   enabled: false
               env:
                 HF_TOKEN: ${HF_TOKEN}
-              args: "google/gemma-4-31b"
+              args: "Qwen/Qwen3.6-35b-A3B"
               resources:
                 limits:
+                  cpu: 10000m
+                  memory: 30Gi
                   nvidia.com/gpu: 2
     ingress:
       main:
