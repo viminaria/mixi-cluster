@@ -6,7 +6,7 @@ metadata:
   namespace: llmkube-system
 spec:
   modelRef: mistral-7b
-  image: ghcr.io/ggml-org/llama.cpp:server
+  image: ghcr.io/ggml-org/llama.cpp:server-cuda13
   runtimeClassName: nvidia
   replicas: 1
   contextSize: 32768
