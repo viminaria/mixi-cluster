@@ -15,11 +15,11 @@ spec:
   priorityClassName: llmkube-llmkube-normal
   extraArgs:
     - --n-gpu-layers
-    - "60"
+    - "38"
     - --split-mode
     - row
   replicas: 1
-  contextSize: 32768
+  contextSize: 65536
   flashAttention: true
   resources:
     gpu: 2
