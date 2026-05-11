@@ -1,0 +1,16 @@
+---
+apiVersion: inference.llmkube.dev/v1alpha1
+kind: InferenceService
+metadata:
+  name: mistral-7b
+  namespace: llmkube-system
+spec:
+  modelRef: mistral-7b
+  runtimeClassName: nvidia
+  replicas: 1
+  contextSize: 32768
+  flashAttention: true
+  resources:
+    gpu: 2
+    cpu: "4"
+    memory: "8Gi"

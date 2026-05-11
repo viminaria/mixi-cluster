@@ -1,0 +1,18 @@
+---
+apiVersion: inference.llmkube.dev/v1alpha1
+kind: Model
+metadata:
+  name: mistral-7b
+  namespace: llmkube-system
+spec:
+  source: https://huggingface.co/bartowski/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3-Q5_K_M.gguf
+  format: gguf
+  quantization: Q5_K_M
+  hardware:
+    accelerator: cuda
+    gpu:
+      enabled: true
+      count: 2
+  resources:
+    cpu: "4"
+    memory: "8Gi"
