@@ -13,6 +13,7 @@ spec:
     runAsUser: 1000
     fsGroup: 1000
   priorityClassName: llmkube-llmkube-normal
+  moeCPUOffload: true
   extraArgs:
     - --n-gpu-layers
     - "60"
