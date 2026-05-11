@@ -13,12 +13,13 @@ spec:
     runAsUser: 1000
     fsGroup: 1000
   priorityClassName: llmkube-llmkube-normal
-  moeCPUOffload: true
   extraArgs:
     - --n-gpu-layers
     - "60"
+    - --split-mode
+    - row
   replicas: 1
-  contextSize: 16384
+  contextSize: 32768
   flashAttention: true
   resources:
     gpu: 2
