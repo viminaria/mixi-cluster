@@ -14,3 +14,11 @@ spec:
   sourceRef:
     kind: GitRepository
     name: llmkube
+  patches:
+    - patch: |
+        - op: replace
+          path: /spec/template/spec/containers/0/image
+          value: ghcr.io/defilantech/llmkube-controller:0.7.7
+      target:
+        kind: Deployment
+        name: llmkube-controller-manager
