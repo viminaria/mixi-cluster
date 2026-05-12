@@ -15,16 +15,35 @@ spec:
   priorityClassName: llmkube-llmkube-normal
   extraArgs:
     - --n-gpu-layers
-    - "60"
+    - "999"
     - --split-mode
     - row
+    - -t
+    - "10"
+    - --temp
+    - "1.0"
+    - --top-p
+    - "0.95"
+    - --top-k
+    - "64"
+    - --batch-size
+    - "4096"
+    - -ub
+    - "1120"
+    - -ctk
+    - q8_0
+    - -ctv
+    - q8_0
+    - -np
+    - "1"
+    - --no-mmap
   replicas: 1
-  contextSize: 32768
+  contextSize: 262144
   flashAttention: true
   resources:
     gpu: 2
-    cpu: "4"
-    memory: "16Gi"
+    cpu: "10"
+    memory: "24Gi"
   endpoint:
     type: ClusterIP
     port: 8080
