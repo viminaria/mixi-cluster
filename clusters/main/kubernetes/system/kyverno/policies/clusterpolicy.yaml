@@ -35,5 +35,5 @@ spec:
                 drop:
                 - ALL
             volumeMounts:
-            - name: model-storage
+            - name: model-cache
               mountPath: /models
