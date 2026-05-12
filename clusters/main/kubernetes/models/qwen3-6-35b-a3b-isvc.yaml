@@ -18,6 +18,8 @@ spec:
     - "60"
     - --mmproj
     - /models/mmproj.gguf
+    - --mmproj-gpu-layers
+    - "0"
   replicas: 1
   contextSize: 49152
   flashAttention: true
