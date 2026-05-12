@@ -23,7 +23,6 @@ spec:
     - "1"
     - --tools
     - all
-    - --vision-gemma-4b-default
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
