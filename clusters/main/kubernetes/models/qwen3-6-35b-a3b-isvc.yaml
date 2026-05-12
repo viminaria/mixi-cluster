@@ -19,9 +19,9 @@ spec:
     - --mmproj
     - /models/mmproj.gguf
   replicas: 1
-  cacheTypeK: q4_0
-  cacheTypeV: q4_0
-  contextSize: 131072
+  cacheTypeCustomK: turbo4
+  cacheTypeCustomV: turbo4
+  contextSize: 98304
   flashAttention: true
   resources:
     gpu: 2
