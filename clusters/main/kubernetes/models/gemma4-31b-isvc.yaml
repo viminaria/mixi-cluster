@@ -16,7 +16,7 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "60"
-  replicas: 0
+  replicas: 1
   contextSize: 32768
   flashAttention: true
   resources:
