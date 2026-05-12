@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qwen3-6-35b-a3b
+  namespace: llmkube-system
+  annotations:
+    cert-manager.io/cluster-issuer: domain-0-le-prod
+    cert-manager.io/private-key-rotation-policy: Always
+spec:
+  ingressClassName: internal
+  rules:
+  - host: qwen.${DOMAIN_0}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: qwen3-6-35b-a3b
+            port:
+              number: 8080
+  tls:
+    - hosts:
+      - qwen.${DOMAIN_0}
+      secretName: qwen-tls-0
