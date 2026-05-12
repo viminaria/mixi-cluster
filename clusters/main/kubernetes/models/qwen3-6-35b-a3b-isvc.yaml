@@ -16,9 +16,11 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "60"
-    - --reasoning=on
+    - --reasoning
+    - on
     - --metrics
-    - --cache-reuse=1
+    - --cache-reuse
+    - "1"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
