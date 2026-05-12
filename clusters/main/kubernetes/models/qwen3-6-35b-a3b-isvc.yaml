@@ -6,7 +6,7 @@ metadata:
   namespace: llmkube-system
 spec:
   modelRef: qwen3-6-35b-a3b
-  image: ghcr.io/ggml-org/llama.cpp:server-cuda
+  image: ghcr.io/ggml-org/llama.cpp:server-cuda13
   runtimeClassName: nvidia
   podSecurityContext:
     runAsNonRoot: true
@@ -16,6 +16,10 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "60"
+    - --reasoning
+    - --metrics
+    - --cache-reuse
+    - "1"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
