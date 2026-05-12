@@ -15,4 +15,3 @@ resources:
   - llmkube/ks.yaml
   - nvidia-device-plugin/ks.yaml
   - kyverno/ks.yaml
-  - kyverno/policies/ks.yaml

@@ -16,12 +16,10 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "60"
-    - --mmproj
-    - /models/mmproj.gguf
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
-  contextSize: 49152
+  contextSize: 131072
   flashAttention: true
   resources:
     gpu: 2
