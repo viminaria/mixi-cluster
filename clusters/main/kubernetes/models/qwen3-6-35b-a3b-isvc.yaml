@@ -23,6 +23,18 @@ spec:
     - "1"
     - --tools
     - all
+    - --temp
+    - "1.0"
+    - --top-p
+    - "0.95"
+    - --top-k
+    - "20"
+    - --min-p
+    - "0.0"
+    - --presence-penalty
+    - "1.5"
+    - --repeat-penalty
+    - "1.0"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
