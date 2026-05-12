@@ -38,7 +38,7 @@ spec:
     - "1"
     - --no-mmap
   replicas: 1
-  contextSize: 65536
+  contextSize: 32768
   flashAttention: true
   resources:
     gpu: 2
