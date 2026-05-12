@@ -16,6 +16,8 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "60"
+    - --split-mode
+    - row
   replicas: 1
   contextSize: 32768
   flashAttention: true
