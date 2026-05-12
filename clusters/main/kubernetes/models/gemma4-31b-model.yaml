@@ -1,9 +1,0 @@
----
-apiVersion: inference.llmkube.dev/v1alpha1
-kind: Model
-metadata:
-  name: gemma4-31b
-  namespace: llmkube-system
-spec:
-  source: https://huggingface.co/unsloth/gemma-4-31B-it-GGUF/resolve/main/gemma-4-31B-it-Q4_K_M.gguf
-  format: gguf

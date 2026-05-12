@@ -4,6 +4,3 @@ resources:
   - qwen3-6-35b-a3b-model.yaml
   - qwen3-6-35b-a3b-isvc.yaml
   - qwen3-6-35b-a3b-ingress.yaml
-  - gemma4-31b-model.yaml
-  - gemma4-31b-isvc.yaml
-  - gemma4-31b-ingress.yaml
