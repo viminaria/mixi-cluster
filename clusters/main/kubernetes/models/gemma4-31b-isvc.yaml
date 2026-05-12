@@ -16,8 +16,6 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "999"
-    - --split-mode
-    - row
     - -t
     - "10"
     - --temp
