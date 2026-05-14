@@ -65,3 +65,16 @@ Each app/system component has a `ks.yaml` (Flux Kustomization) and an `app/` dir
 - Helm releases via Flux HelmRelease (TrueCharts charts)
 - Each app owns its namespace
 - Models (LLM serving) use separate IsClusterIP, Ingress, Model manifests
+
+## Chart Values
+
+TrueCharts Helm values reference (source of truth for available options):
+
+```
+https://github.com/trueforge-org/truecharts/blob/master/charts/{incubator|stable}/{chart}/values.yaml
+```
+
+- `incubator/` — experimental/newer charts
+- `stable/` — mature/stable charts
+- Replace `{chart}` with the actual chart directory name (usually differs from release name)
+- Upstream `values.yaml` is the source of truth with all defaults. Only override keys in HelmRelease that actually differ from defaults — every value set in `helm-release.yaml` overrides upstream, so minimize values to reduce drift and simplify upgrades
