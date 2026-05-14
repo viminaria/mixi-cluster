@@ -36,8 +36,8 @@ spec:
     - --repeat-penalty
     - "1.0"
   replicas: 1
-  cacheTypeK: q4_0_8_8
-  cacheTypeV: q4_0_8_8
+  cacheTypeK: q4_0
+  cacheTypeV: q4_0
   contextSize: 131072
   flashAttention: true
   resources:
