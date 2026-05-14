@@ -29,8 +29,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    ## set stopAll to "true" if you do not want to use blocky
-    # and/or disable its service
     global:
       stopAll: false
     service:
@@ -42,16 +40,11 @@ spec:
           metallb:
             enabled: true
     k8sgateway:
-      # -- list of processed domains
       domains:
       - domain: "${DOMAIN_0}"
-        # -- Optional configuration option for DNS01 challenge that will redirect all acme
-        # challenge requests to external cloud domain (e.g. managed by cert-manager)
-        # See: https://cert-manager.io/docs/configuration/acme/dns01/
         dnsChallenge:
           enabled: false
           domain: dns01.clouddns.com
-
       forward:
         enabled: false
         primary: tls://1.1.1.1
@@ -59,18 +52,40 @@ spec:
         options:
           - name: tls_servername
             value: cloudflare-dns.com
-
-    # CANNOT be defined in above yaml section
-    queryLog:
-      # optional one of: mysql, postgresql, csv, csv-client. If empty, log to console only
-      type: ""
-
+    defaultUpstreams:
+      - tls://1.1.1.1:853
+      - tls://dns.google:853
+      - https://dns.google/dns-query
+      - https://cloudflare-dns.com/dns-query
+      - https://dns.cloudflare.com/dns-query
+      - tls://dns.mullvad.net
+      - https://dns.mullvad.net/dns-query
+    caching:
+      minTime: 5m
+      maxTime: 30m
+      prefetchExpires: 2m
+      prefetchThreshold: 3
+      prefetchMaxItemsCount: 1000
+    upstreamTimeout: 2s
+    logLevel: warn
     configmap:
+      blocky: {}
       dashboard:
         enabled: false
       datasource:
         enabled: false
-
     cnpg:
       main:
         enabled: false
+
+    prometheus:
+      enable: true
+      path: /metrics
+
+    metrics:
+      main:
+        enabled: true
+        type: servicemonitor
+        endpoints:
+          - port: main
+            path: /metrics
