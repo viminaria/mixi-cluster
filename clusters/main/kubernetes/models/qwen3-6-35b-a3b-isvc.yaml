@@ -18,6 +18,7 @@ spec:
     - "60"
     - --mmproj
     - /models/mmproj.gguf
+    - --no-mmproj-offload
     - --reasoning
     - on
     - --metrics
