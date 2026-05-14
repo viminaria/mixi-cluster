@@ -69,7 +69,6 @@ spec:
     upstreamTimeout: 2s
     logLevel: warn
     configmap:
-      blocky: {}
       dashboard:
         enabled: false
       datasource:
