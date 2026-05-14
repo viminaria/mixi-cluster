@@ -16,6 +16,8 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "60"
+    - --mmproj
+    - /models/mmproj.gguf
     - --reasoning
     - on
     - --metrics
