@@ -46,4 +46,4 @@ spec:
   resources:
     gpu: 2
     cpu: "4"
-    memory: "16Gi"
+    memory: "20Gi"
