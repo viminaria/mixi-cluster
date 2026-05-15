@@ -19,6 +19,8 @@ spec:
     - --mmproj
     - /models/mmproj.gguf
     - --no-mmproj-offload
+    - --image-min-tokens
+    - "1024"
     - --reasoning
     - on
     - --metrics
@@ -46,4 +48,4 @@ spec:
   resources:
     gpu: 2
     cpu: "4"
-    memory: "20Gi"
+    memory: "16Gi"
