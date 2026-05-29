@@ -30,9 +30,6 @@ spec:
   values:
     global:
       stopAll: false
-    securityContext:
-      container:
-        privileged: true
     ingress:
       main:
         enabled: true
