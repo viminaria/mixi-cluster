@@ -55,7 +55,7 @@ Each app/system component has a `ks.yaml` (Flux Kustomization) and an `app/` dir
 ## GitOps flow
 
 1. Push changes to `main` branch
-2. Flux polls the repo, applies changes to cluster
+2. Flux webhook triggers reconciliation immediately on push — no wait needed
 3. SOPS decryption and variable substitution applied via `postBuild.substituteFrom`
 4. `substitution.flux.home.arpa/disabled=true` label skips substitution
 
