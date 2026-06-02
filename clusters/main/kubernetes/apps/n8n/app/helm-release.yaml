@@ -28,6 +28,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    TZ: Europe/Helsinki
     global:
       stopAll: false
     ingress:
@@ -46,3 +47,19 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                - name: N8N_EDITOR_BASE_URL
+                  value: "https://n8n.${DOMAIN_0}"
+                - name: N8N_AI_ASSISTANT_BASE_URL
+                  value: "https://n8n.${DOMAIN_0}"
+                - name: N8N_HOST
+                  value: "n8n.${DOMAIN_0}"
+                - name: N8N_PROTOCOL
+                  value: https
+                - name: WEBHOOK_URL
+                  value: "https://n8n.${DOMAIN_0}/"
