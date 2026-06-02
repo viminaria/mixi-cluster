@@ -31,6 +31,11 @@ spec:
     TZ: Europe/Helsinki
     global:
       stopAll: false
+    deployment:
+      N8N_HOST: "n8n.${DOMAIN_0}"
+      N8N_EDITOR_BASE_URL: "https://n8n.${DOMAIN_0}"
+    endpoints:
+      WEBHOOK_URL: "https://n8n.${DOMAIN_0}/"
     ingress:
       main:
         enabled: true
@@ -53,8 +58,5 @@ spec:
           containers:
             main:
               env:
-                N8N_EDITOR_BASE_URL: "https://n8n.${DOMAIN_0}"
                 N8N_AI_ASSISTANT_BASE_URL: "https://n8n.${DOMAIN_0}"
-                N8N_HOST: "n8n.${DOMAIN_0}"
                 N8N_PROTOCOL: "https"
-                WEBHOOK_URL: "https://n8n.${DOMAIN_0}/"
