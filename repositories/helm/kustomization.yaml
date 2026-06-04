@@ -14,4 +14,5 @@ resources:
   - spegel.yaml
   - truecharts.yaml
   - kyverno.yaml
+  - grafana-community.yaml
 # more goes here!
