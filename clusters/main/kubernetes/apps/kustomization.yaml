@@ -17,4 +17,5 @@ resources:
   - grafana/ks.yaml
   - nextcloud/ks.yaml
   - home-assistant/ks.yaml
+  - valkey/ks.yaml
   - n8n/ks.yaml

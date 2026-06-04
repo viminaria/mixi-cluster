@@ -37,6 +37,7 @@ spec:
             main:
               env:
                 SEARXNG_SECRET: ${SEARXNG_SECRET_KEY}
+                SEARXNG_REDIS_URL: redis://valkey.valkey.svc.cluster.local:6379/0
     securityContext:
       privileged: true
     ingress:
