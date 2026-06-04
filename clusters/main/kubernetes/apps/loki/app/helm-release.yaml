@@ -32,7 +32,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    deploymentMode: SingleBinary
+    deploymentMode: Monolithic
     singleBinary:
       replicas: 1
       persistence:
@@ -47,32 +47,7 @@ spec:
           memory: 512Mi
         limits:
           memory: 3Gi
-      sidecar: true
-    gateway:
-      enabled: false
     monitoring: {}
-    backend:
-      replicas: 0
-    write:
-      enabled: false
-    read:
-      enabled: false
-    queryFrontend:
-      enabled: false
-    queryScheduler:
-      enabled: false
-    distributor:
-      enabled: false
-    ingester:
-      enabled: false
-    compactor:
-      enabled: false
-    indexGateway:
-      replicas: 0
-    bloomCompactor:
-      enabled: false
-    bloomGovernor:
-      enabled: false
     analytics:
       reporting_enabled: false
 
