@@ -54,19 +54,18 @@ spec:
         replication_factor: 1
       storage:
         type: fs
-      storageConfiguration:
-        fs:
-          directory: /loki/chunks
+      storageConfiguration: {}
       auth_enabled: false
       schemaConfig:
         configs:
         - from: '2024-04-01'
           store: tsdb
-          object_store: ''
+          object_store: filesystem
           schema: v13
           index:
             prefix: loki_index_
             period: 24h
+      storage_type: filesystem
     read:
       enabled: false
       replicas: 0
