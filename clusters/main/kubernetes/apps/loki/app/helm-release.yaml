@@ -74,6 +74,8 @@ spec:
     write:
       enabled: false
       replicas: 0
+    affinity:
+      podAntiAffinity: disabled
     backend:
       enabled: false
       replicas: 0
