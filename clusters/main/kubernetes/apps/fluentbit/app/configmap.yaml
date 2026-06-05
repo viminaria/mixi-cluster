@@ -7,20 +7,20 @@ data:
   fluent-bit.conf: |
     [SERVICE]
         Flush         5
-        Log_Level     info
+        Log_Level     debug
         Daemon        off
         Parsers_File  parsers.conf
 
     [INPUT]
         Name              tail
-        Path              /var/log/containers/*.log
+        Path              /var/log/pods/*/*/*.log
+        Exclude_Path      /var/log/pods/logging/fluent-bit-*/fluent-bit/*//*.log
         Parser            docker
         Tag               kube.*
-        Exclude_Path      /var/log/containers/fluent-bit-*.log
+        Read_From_Head    On
         Refresh_Interval  10
         Rotate_Wait       30
         Mem_Buf_Limit     5MB
-        Skip_Long_Lines   On
 
     [FILTER]
         Name                kubernetes
