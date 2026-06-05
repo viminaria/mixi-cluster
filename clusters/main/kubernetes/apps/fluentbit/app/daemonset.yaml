@@ -19,7 +19,7 @@ spec:
         - operator: Exists
       containers:
         - name: fluent-bit
-          image: fluent/fluent-bit:3.0.12
+          image: fluent/fluent-bit:3.0.4
           env:
             - name: HOSTNAME
               valueFrom:
