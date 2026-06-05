@@ -36,10 +36,10 @@ data:
     [OUTPUT]
         Name             loki
         Match            kube.*
-        Host             loki.logging.svc.cluster.local
+        Host             loki.loki.svc.cluster.local
         Port             3100
-        Log_Annotations  true
-        Labels           cluster=mixi-cluster,environment=production
+        uri              /loki/api/v1/push
+        auto_kubernetes_labels on
 
   parsers.conf: |
     [PARSER]
