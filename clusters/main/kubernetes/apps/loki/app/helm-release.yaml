@@ -56,6 +56,8 @@ spec:
         type: fs
       storageConfiguration: {}
       auth_enabled: false
+      limits_config:
+        volume_enabled: true
       schemaConfig:
         configs:
         - from: '2024-04-01'
