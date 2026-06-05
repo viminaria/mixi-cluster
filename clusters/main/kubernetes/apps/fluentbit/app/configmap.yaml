@@ -17,7 +17,7 @@ data:
         Parser            docker
         Tag               kube.*
         Exclude_Path      /var/log/containers/fluent-bit-*.log
-        Refresh_Interval_Sec 10
+        Refresh_Interval  10
         Rotate_Wait       30
         Mem_Buf_Limit     5MB
         Skip_Long_Lines   On
@@ -41,3 +41,9 @@ data:
         Log_Annotations  true
         Labels           cluster=mixi-cluster,environment=production
 
+  parsers.conf: |
+    [PARSER]
+        Name          docker
+        Format        json
+        Time_Key      time
+        Time_Format   %Y-%m-%dT%H:%M:%S.%LZ
