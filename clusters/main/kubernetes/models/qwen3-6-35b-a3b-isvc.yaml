@@ -16,11 +16,6 @@ spec:
   extraArgs:
     - --n-gpu-layers
     - "60"
-    - --mmproj
-    - /models/mmproj.gguf
-    - --no-mmproj-offload
-    - --image-min-tokens
-    - "1024"
     - --reasoning
     - on
     - --metrics
