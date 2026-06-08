@@ -14,8 +14,6 @@ spec:
     fsGroup: 1000
   priorityClassName: llmkube-llmkube-normal
   extraArgs:
-    - --n-gpu-layers
-    - "38"
     - --reasoning
     - on
     - --metrics
@@ -36,11 +34,7 @@ spec:
     - --repeat-penalty
     - "1.0"
     - --fit
-    - on
-    - --fit-target
-    - "512"
-    - --fit-ctx
-    - "131072"
+    - off
     - --spec-type
     - draft-mtp
     - --spec-draft-n-max
@@ -48,7 +42,7 @@ spec:
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
-  contextSize: 131072
+  contextSize: 81920
   flashAttention: true
   resources:
     gpu: 2
