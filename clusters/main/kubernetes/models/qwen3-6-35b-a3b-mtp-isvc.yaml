@@ -45,6 +45,8 @@ spec:
     - draft-mtp
     - --spec-draft-n-max
     - "2"
+    - --spec-draft-ctx
+    - "512"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
