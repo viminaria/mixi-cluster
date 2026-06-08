@@ -41,7 +41,11 @@ spec:
     - --repeat-penalty
     - "1.0"
     - --fit
-    - off
+    - on
+    - --fit-target
+    - "1536"
+    - --fit-ctx
+    - "131072"
     - --spec-type
     - draft-mtp
     - --spec-draft-n-max
