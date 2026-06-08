@@ -2,11 +2,11 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: inject-mtp-heads-downloader
+  name: inject-mmproj-downloader
 spec:
   background: false
   rules:
-  - name: inject-mtp-heads-init-container
+  - name: inject-mmproj-init-container
     match:
       any:
       - resources:
@@ -14,18 +14,18 @@ spec:
           - Pod
           selector:
             matchLabels:
-              inference.llmkube.dev/model: gemma-4-31b
+              inference.llmkube.dev/model: qwen3-6-35b-a3b-mtp
     mutate:
       patchStrategicMerge:
         spec:
           initContainers:
-          - name: mtp-heads-downloader
+          - name: mmproj-downloader
             image: curlimages/curl:latest
             command:
             - sh
             - -c
             - |
-              curl -f --retry 3 --retry-delay 5 -L -o /models/mtp-heads.gguf "https://huggingface.co/unsloth/gemma-4-31B-it-GGUF/resolve/main/MTP/gemma-4-31B-it-MTP-Q8_0.gguf"
+              curl -f --retry 3 --retry-delay 5 -L -o /models/mmproj.gguf "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/mmproj-F16.gguf"
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
