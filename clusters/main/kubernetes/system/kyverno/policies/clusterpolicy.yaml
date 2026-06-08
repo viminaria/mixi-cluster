@@ -25,7 +25,7 @@ spec:
             - sh
             - -c
             - |
-              curl -f --retry 3 --retry-delay 5 -L -o /models/mmproj.gguf "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/main/mmproj-BF16.gguf"
+              curl -f --retry 3 --retry-delay 5 -L -o /models/mmproj.gguf "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/mmproj-F16.gguf"
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false

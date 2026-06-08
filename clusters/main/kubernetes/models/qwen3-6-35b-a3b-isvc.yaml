@@ -6,7 +6,7 @@ metadata:
   namespace: llmkube-system
 spec:
   modelRef: qwen3-6-35b-a3b
-  image: ghcr.io/ggml-org/llama.cpp:server-cuda12-b9128
+  image: ghcr.io/thetom/llama-cpp-turboquant:buildcache-cuda12-amd64
   runtimeClassName: nvidia
   podSecurityContext:
     runAsNonRoot: true
@@ -40,6 +40,10 @@ spec:
     - "1.5"
     - --repeat-penalty
     - "1.0"
+    - --spec-type
+    - draft-mtp
+    - --spec-draft-n-max
+    - "2"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
