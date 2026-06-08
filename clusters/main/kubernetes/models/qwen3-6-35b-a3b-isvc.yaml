@@ -43,7 +43,7 @@ spec:
     - --spec-type
     - draft
     - --spec-draft-n-max
-    - "2"
+    - "3"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
