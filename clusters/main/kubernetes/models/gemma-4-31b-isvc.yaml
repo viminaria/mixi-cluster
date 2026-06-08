@@ -2,10 +2,10 @@
 apiVersion: inference.llmkube.dev/v1alpha1
 kind: InferenceService
 metadata:
-  name: qwen3-6-35b-a3b-mtp
+  name: gemma-4-31b
   namespace: llmkube-system
 spec:
-  modelRef: qwen3-6-35b-a3b-mtp
+  modelRef: gemma-4-31b
   image: ghcr.io/ggml-org/llama.cpp:server-cuda12-b9544
   runtimeClassName: nvidia
   podSecurityContext:
@@ -14,6 +14,8 @@ spec:
     fsGroup: 1000
   priorityClassName: llmkube-llmkube-normal
   extraArgs:
+    - --n-gpu-layers
+    - "60"
     - --reasoning
     - on
     - --metrics
@@ -35,8 +37,10 @@ spec:
     - "1.0"
     - --fit
     - off
+    - --model-draft
+    - /models/mtp-heads.gguf
     - --spec-type
-    - draft-mtp
+    - draft
     - --spec-draft-n-max
     - "4"
   replicas: 1
