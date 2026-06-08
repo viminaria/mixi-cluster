@@ -40,11 +40,11 @@ spec:
     - --spec-type
     - draft-mtp
     - --spec-draft-n-max
-    - "4"
+    - "2"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
-  contextSize: 131072
+  contextSize: 159744
   flashAttention: true
   resources:
     gpu: 2
