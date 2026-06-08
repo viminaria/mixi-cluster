@@ -15,7 +15,7 @@ spec:
   priorityClassName: llmkube-llmkube-normal
   extraArgs:
     - --n-gpu-layers
-    - "60"
+    - "39"
     - --reasoning
     - on
     - --metrics
@@ -38,15 +38,13 @@ spec:
     - --fit
     - on
     - --fit-target
-    - "1536"
+    - "512"
     - --fit-ctx
     - "131072"
     - --spec-type
     - draft-mtp
     - --spec-draft-n-max
     - "2"
-    - --spec-draft-ctx
-    - "512"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0

@@ -16,10 +16,10 @@ data:
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
         Tag               kube.*
         DB                /run/fluentbit/fluent-bit.db
-        Read_From_Head    On
-        Refresh_Interval  30
-        Rotate_Wait       120
-        Mem_Buf_Limit     5MB
+        DB.Sync           Normal
+        DB.Locking        On
+        Refresh_Interval  30s
+        Ignore_Older      24h
 
     [OUTPUT]
         Name             loki
@@ -27,4 +27,4 @@ data:
         Host             loki.loki.svc.cluster.local
         Port             3100
         uri              /loki/api/v1/push
-
+        Retry_Limit      False

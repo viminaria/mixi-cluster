@@ -57,6 +57,9 @@ spec:
       storageConfiguration: {}
       auth_enabled: false
       limits_config:
+        ingestion_rate_mb: 100
+        ingestion_burst_size_mb: 200
+        max_log_size_per_line: 512000
         volume_enabled: true
       schemaConfig:
         configs:
