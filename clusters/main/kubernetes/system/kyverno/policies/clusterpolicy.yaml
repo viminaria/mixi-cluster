@@ -14,7 +14,7 @@ spec:
           - Pod
           selector:
             matchLabels:
-              inference.llmkube.dev/model: qwen3-6-35b-a3b-disabled
+              inference.llmkube.dev/model: qwen3-6-35b-a3b-mtp
     mutate:
       patchStrategicMerge:
         spec:
