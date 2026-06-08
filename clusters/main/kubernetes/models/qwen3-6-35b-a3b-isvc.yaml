@@ -40,8 +40,10 @@ spec:
     - "1.5"
     - --repeat-penalty
     - "1.0"
+    - --fit
+    - off
     - --spec-type
-    - mtp
+    - draft-mtp
     - --spec-draft-n-max
     - "2"
   replicas: 1
