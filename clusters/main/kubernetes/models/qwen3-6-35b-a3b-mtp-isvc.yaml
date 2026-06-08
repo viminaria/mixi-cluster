@@ -46,7 +46,7 @@ spec:
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
-  contextSize: 196608
+  contextSize: 262144
   flashAttention: true
   resources:
     gpu: 2
