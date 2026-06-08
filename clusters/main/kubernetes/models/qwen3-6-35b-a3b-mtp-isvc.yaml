@@ -26,7 +26,7 @@ spec:
     - --tools
     - all
     - --temp
-    - "1.0"
+    - "0.9"
     - --top-p
     - "0.95"
     - --top-k
@@ -43,6 +43,8 @@ spec:
     - draft-mtp
     - --spec-draft-n-max
     - "3"
+    - --spec-draft-p-min
+    - "0.6"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
