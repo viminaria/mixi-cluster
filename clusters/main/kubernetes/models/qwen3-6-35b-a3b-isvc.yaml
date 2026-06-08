@@ -6,7 +6,7 @@ metadata:
   namespace: llmkube-system
 spec:
   modelRef: qwen3-6-35b-a3b
-  image: ghcr.io/ggml-org/llama.cpp:server-cuda
+  image: ghcr.io/ggml-org/llama.cpp:server-cuda12-b9128
   runtimeClassName: nvidia
   podSecurityContext:
     runAsNonRoot: true
@@ -41,7 +41,7 @@ spec:
     - --repeat-penalty
     - "1.0"
     - --spec-type
-    - draft-mtp
+    - draft
     - --spec-draft-n-max
     - "2"
   replicas: 1
