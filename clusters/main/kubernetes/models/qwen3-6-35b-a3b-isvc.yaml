@@ -40,10 +40,6 @@ spec:
     - "1.5"
     - --repeat-penalty
     - "1.0"
-    - --spec-type
-    - draft
-    - --spec-draft-n-max
-    - "3"
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
