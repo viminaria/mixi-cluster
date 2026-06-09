@@ -16,11 +16,11 @@ data:
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
 
     [OUTPUT]
-        Name                 loki
-        Match                var.log.pods.*
-        Host                 172.16.0.27
-        Port                 3100
-        URI                  /loki/api/v1/push
-        tls                  false
+        Name                loki
+        Match               var.log.pods.*
+        Host                172.16.0.27
+        Port                3100
+        URI                 /loki/api/v1/push
+        tls                 false
         auto_kubernetes_labels true
-        retry_limit          5
+        retry_limit         5
