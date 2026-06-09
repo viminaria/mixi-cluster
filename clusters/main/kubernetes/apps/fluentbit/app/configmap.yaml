@@ -7,11 +7,8 @@ data:
   fluent-bit.conf: |
     [SERVICE]
         Flush         5
-        Log_Level     debug2
+        Log_Level     info
         Daemon        off
-        HTTP_Server   On
-        HTTP_Listen   0.0.0.0
-        HTTP_Port     2020
 
     [INPUT]
         Name              tail
@@ -37,8 +34,9 @@ data:
     [OUTPUT]
         Name                 loki
         Match                var.log.pods.*
-        host                 loki.loki.svc.cluster.local
-        port                 3100
-        uri                  /loki/api/v1/push
-        auto_kubernetes_labels true
-        retry_limit          5
+        Host                 loki.loki.svc.cluster.local
+        Port                 3100
+        URI                  /loki/api/v1/push
+        tls                  false
+        auto_kubernetes_labels "true"
+        Retry_Limit          "5"
