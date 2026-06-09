@@ -20,17 +20,6 @@ data:
         Refresh_Interval  30s
         Ignore_Older      24h
 
-    [FILTER]
-        Name                kubernetes
-        Match               var.log.pods.*
-        kube_url            https://10.128.1.15:6443
-        kube_ca_file        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        kube_token_file     /var/run/secrets/kubernetes.io/serviceaccount/token
-        merge_log           On
-        keep_log            On
-        buffer_size         50K
-        k8s-logging.parser  On
-
     [OUTPUT]
         Name                 loki
         Match                var.log.pods.*
