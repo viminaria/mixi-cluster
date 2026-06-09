@@ -10,19 +10,11 @@ data:
         Log_Level     info
         Daemon        off
 
-    [PARSER]
-        Name            k8s-json-parser
-        Format          regex
-        Regex           (?<log>[^\n]+)
-        Time_Key        time
-        Time_Format     %Y-%m-%dT%H:%M:%S.%L%z
-
     [INPUT]
         Name              tail
         Path              /var/log/pods/*/*.log
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
         Tag               kube.*
-        Parser            k8s-json-parser
         DB                /run/fluentbit/fluent-bit.db
         DB.Sync           Normal
         DB.Locking        On
@@ -36,10 +28,7 @@ data:
         Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
         Kube_Tag_Prune      kube
-        Merge_Log           On
-        Keep_Log            On
         Buffer_Size         50K
-        meta_include        true
 
     [OUTPUT]
         Name                 loki
