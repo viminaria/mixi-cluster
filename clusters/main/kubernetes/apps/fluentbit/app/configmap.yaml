@@ -7,18 +7,19 @@ data:
   fluent-bit.conf: |
     [SERVICE]
         Flush         5
-        Log_Level     debug2
+        Log_Level     info
         Daemon        off
 
     [INPUT]
         Name              tail
         Path              /var/log/pods/*/*/*.log
+        Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
         DB                /run/fluentbit/fluent-bit.db
-        Tag               pod.*
         DB.Sync           Normal
         DB.Locking        On
+        Reader            head
 
     [OUTPUT]
         Name                stdout
-        Match               *
+        Match               var.log.pods.*
         Format              json
