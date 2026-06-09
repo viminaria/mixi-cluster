@@ -30,6 +30,7 @@ data:
         merge_log           On
         keep_log            On
         buffer_size         50K
+        k8s-logging.parser  On
 
     [OUTPUT]
         Name                 loki
