@@ -19,8 +19,8 @@ data:
     [OUTPUT]
         Name                loki
         Match               kube.*
-        Host                172.16.0.27
-        Port                3100
+        Host                loki-gateway
+        Port                80
         URI                 /loki/api/v1/push
         tls                  false
         auto_kubernetes_labels true
