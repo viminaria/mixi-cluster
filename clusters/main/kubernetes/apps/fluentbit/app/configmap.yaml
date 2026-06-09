@@ -24,7 +24,7 @@ data:
     [FILTER]
         Name                kubernetes
         Match               kube.*
-        kube_url            https://kubernetes:443
+        kube_url            https://10.128.1.15:6443
         kube_ca_file        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         kube_token_file     /var/run/secrets/kubernetes.io/serviceaccount/token
         merge_log           On
