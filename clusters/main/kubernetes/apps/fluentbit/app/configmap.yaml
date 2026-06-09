@@ -21,6 +21,11 @@ data:
         Ignore_Older      24h
 
     [OUTPUT]
+        Name                stdout
+        Match               var.log.pods.*
+        Format              json
+
+    [OUTPUT]
         Name                 loki
         Match                var.log.pods.*
         Host                 loki.loki.svc.cluster.local
