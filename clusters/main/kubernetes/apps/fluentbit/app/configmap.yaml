@@ -38,5 +38,5 @@ data:
         Port                 3100
         URI                  /loki/api/v1/push
         tls                  false
-        auto_kubernetes_labels "true"
-        Retry_Limit          "5"
+        auto_kubernetes_labels true
+        retry_limit          5
