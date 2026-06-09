@@ -6,23 +6,19 @@ metadata:
 data:
   fluent-bit.conf: |
     [SERVICE]
-        Flush         1
+        Flush         5
         Log_Level     info
         Daemon        off
 
     [INPUT]
-        Name              dummy
-        Tag               var.log.pods.test.dummy.0.log
-
-    [OUTPUT]
-        Name                stdout
-        Match               var.log.pods.*
-        Format              json
+        Name              tail
+        Path              /var/log/pods/*/*/*.log
+        Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
 
     [OUTPUT]
         Name                 loki
         Match                var.log.pods.*
-        Host                 loki.loki.svc.cluster.local
+        Host                 172.16.0.27
         Port                 3100
         URI                  /loki/api/v1/push
         tls                  false
