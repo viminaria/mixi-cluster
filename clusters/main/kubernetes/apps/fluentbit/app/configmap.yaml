@@ -24,17 +24,18 @@ data:
     [FILTER]
         Name                kubernetes
         Match               kube.*
-        Kube_URL            https://kubernetes:443
-        Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
-        Kube_Tag_Prune      kube
-        Buffer_Size         50K
+        kube_url            https://kubernetes:443
+        kube_ca_file        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        kube_token_file     /var/run/secrets/kubernetes.io/serviceaccount/token
+        merge_log           On
+        keep_log            On
+        buffer_size         50K
 
     [OUTPUT]
         Name                 loki
         Match                kube.*
-        Host                 loki.loki.svc.cluster.local
-        Port                 3100
-        URI                  /loki/api/v1/push
-        auto_kubernetes_labels "true"
-        Retry_Limit          "5"
+        host                 loki.loki.svc.cluster.local
+        port                 3100
+        uri                  /loki/api/v1/push
+        auto_kubernetes_labels true
+        retry_limit          5
