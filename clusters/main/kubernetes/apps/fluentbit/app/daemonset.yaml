@@ -15,6 +15,16 @@ spec:
         app: fluent-bit
     spec:
       serviceAccountName: fluent-bit
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fluent-bit
+              topologyKey: kubernetes.io/hostname
       tolerations:
         - operator: Exists
       containers:
