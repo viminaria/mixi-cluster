@@ -6,7 +6,7 @@ metadata:
 data:
   fluent-bit.conf: |
     [SERVICE]
-        Flush         1
+        Flush         5
         Log_Level     info
         Daemon        off
 
@@ -18,13 +18,3 @@ data:
         Name                stdout
         Match               var.log.pods.*
         Format              json
-
-    [OUTPUT]
-        Name                 loki
-        Match                var.log.pods.*
-        Host                 loki.loki.svc.cluster.local
-        Port                 3100
-        URI                  /loki/api/v1/push
-        tls                  false
-        auto_kubernetes_labels true
-        retry_limit          5
