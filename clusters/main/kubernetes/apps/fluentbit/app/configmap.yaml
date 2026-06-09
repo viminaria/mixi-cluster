@@ -16,6 +16,10 @@ data:
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log,*/etc/containers/*/storage
         Tag               kube.${kubernetes["namespace_name"]}.${kubernetes["pod_name"]}-${kubernetes["container_name"]}
 
+    [FILTER]
+        Name                modify
+        Match               kube.*
+
     [OUTPUT]
         Name                loki
         Match               kube.*
