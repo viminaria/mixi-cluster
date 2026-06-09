@@ -24,4 +24,4 @@ data:
         URI                 /loki/api/v1/push
         tls                  false
         auto_kubernetes_labels true
-        Label_Keys            namespace_name,pod_name,container_name
+        Label_Keys            pod_name,container_name
