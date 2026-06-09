@@ -7,18 +7,21 @@ data:
   fluent-bit.conf: |
     [SERVICE]
         Flush         5
-        Log_Level     debug2
+        Log_Level     info
         Daemon        off
 
     [INPUT]
         Name              tail
         Path              /var/log/pods/*/*/*.log
-        Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
-        Tag               kube
-        DB.Sync           Off
-        Refresh_Interval  30s
+        Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log,*/etc/containers/*/storage
+        Tag               kube.${kubernetes["namespace_name"]}.${kubernetes["pod_name"]}-${kubernetes["container_name"]}
 
     [OUTPUT]
-        Name                stdout
-        Match               *
-        Format              json
+        Name                loki
+        Match               kube.*
+        Host                172.16.0.27
+        Port                3100
+        URI                 /loki/api/v1/push
+        tls                  false
+        auto_kubernetes_labels true
+        Label_Keys            namespace_name,pod_name,container_name
