@@ -14,11 +14,14 @@ data:
         Name              tail
         Path              /var/log/pods/*/*/*.log
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log,*/etc/containers/*/storage
-        Tag               kube.${kubernetes["namespace_name"]}.${kubernetes["pod_name"]}-${kubernetes["container_name"]}
+        Tag               kube
 
     [FILTER]
-        Name                modify
+        Name                kubernetes
         Match               kube.*
+        Kube_URL            https://kubernetes.default.svc:443
+        Merge_Log           On
+        K8S-Logging.Parser  On
 
     [OUTPUT]
         Name                loki
@@ -26,6 +29,6 @@ data:
         Host                loki-gateway
         Port                80
         URI                 /loki/api/v1/push
-        tls                  false
+        tls                 false
         auto_kubernetes_labels true
-        Label_Keys            pod_name,container_name
+        Label_Keys            namespace_name,pod_name,container_name
