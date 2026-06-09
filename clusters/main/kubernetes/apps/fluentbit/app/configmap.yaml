@@ -11,14 +11,8 @@ data:
         Daemon        off
 
     [INPUT]
-        Name              tail
-        Path              /var/log/pods/*/*/*.log
-        Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
-        DB                /run/fluentbit/fluent-bit.db
-        DB.Sync           Normal
-        DB.Locking        On
-        Refresh_Interval  30s
-        Ignore_Older      24h
+        Name              dummy
+        Tag               var.log.pods.test.dummy.0.log
 
     [OUTPUT]
         Name                stdout
