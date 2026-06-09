@@ -12,7 +12,7 @@ data:
 
     [INPUT]
         Name              tail
-        Path              /var/log/pods/*/*.log
+        Path              /var/log/pods/*/*/*.log
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
         Tag               kube.*
         DB                /run/fluentbit/fluent-bit.db
