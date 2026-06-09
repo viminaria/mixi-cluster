@@ -14,7 +14,6 @@ data:
         Name              tail
         Path              /var/log/pods/*/*/*.log
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
-        Tag               kube.*
         DB                /run/fluentbit/fluent-bit.db
         DB.Sync           Normal
         DB.Locking        On
@@ -23,7 +22,7 @@ data:
 
     [FILTER]
         Name                kubernetes
-        Match               kube.*
+        Match               var.log.pods.*
         kube_url            https://10.128.1.15:6443
         kube_ca_file        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         kube_token_file     /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -34,7 +33,7 @@ data:
 
     [OUTPUT]
         Name                 loki
-        Match                kube.*
+        Match                var.log.pods.*
         host                 loki.loki.svc.cluster.local
         port                 3100
         uri                  /loki/api/v1/push
