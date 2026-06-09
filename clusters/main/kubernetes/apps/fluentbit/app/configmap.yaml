@@ -6,13 +6,14 @@ metadata:
 data:
   fluent-bit.conf: |
     [SERVICE]
-        Flush         5
+        Flush         1
         Log_Level     info
         Daemon        off
 
     [INPUT]
         Name              tail
         Path              /var/log/pods/*/*/*.log
+        Invalid_Property_Here   test
         Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log
         DB                /run/fluentbit/fluent-bit.db
         DB.Sync           Normal
