@@ -18,27 +18,37 @@ data:
           "datasource": { "type": "loki", "uid": "loki" },
           "id": 1,
           "title": "Log Volume by Service",
-          "type": "stat",
+          "type": "table",
           "fieldConfig": {
             "defaults": {
-              "color": { "mode": "continuous-GrYlRd" },
+              "custom": {
+                "align": "left"
+              },
               "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
               "unit": "short"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": { "id": "byName", "options": "service_name" },
+                "properties": [
+                  { "id": "custom.displayName", "value": "Service" }
+                ]
+              },
+              {
+                "matcher": { "id": "byName", "options": "Value" },
+                "properties": [
+                  { "id": "custom.displayName", "value": "Log Lines" },
+                  { "id": "custom.width", "value": 120 }
+                ]
+              }
+            ]
           },
           "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
           "options": {
-            "colorMode": "none",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": ["lastNotNull"],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "value_and_name"
+            "cellHeight": "sm",
+            "footer": { "show": false },
+            "showHeader": true,
+            "sortBy": [{ "desc": true, "displayName": "Log Lines" }]
           },
           "targets": [
             {
