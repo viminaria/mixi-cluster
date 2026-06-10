@@ -18,44 +18,27 @@ data:
           "datasource": { "type": "loki", "uid": "loki" },
           "id": 1,
           "title": "Log Volume by Service",
-          "type": "table",
+          "type": "bargauge",
           "fieldConfig": {
             "defaults": {
-              "custom": {
-                "align": "left",
-                "cellOptions": { "type": "auto" }
-              },
+              "color": { "mode": "continuous-GrYlRd" },
               "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
-              "unit": "short",
-              "reduceOptions": {
-                "calcs": ["lastNotNull"]
-              }
+              "unit": "short"
             },
-            "overrides": [
-              {
-                "matcher": { "id": "byName", "options": "service_name" },
-                "properties": [
-                  { "id": "custom.displayName", "value": "Service" },
-                  { "id": "custom.width", "value": 300 }
-                ]
-              },
-              {
-                "matcher": { "id": "byName", "options": "Value" },
-                "properties": [
-                  { "id": "custom.displayName", "value": "Log Lines" },
-                  { "id": "custom.displayMode", "value": "color-background-solid" },
-                  { "id": "custom.width", "value": 400 },
-                  { "id": "color", "value": { "mode": "continuous-GrYlRd" } }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
           "options": {
-            "cellHeight": "md",
-            "footer": { "show": false },
-            "showHeader": true,
-            "sortBy": [{ "desc": true, "displayName": "Log Lines" }]
+            "displayMode": "gradient",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": ["lastNotNull"],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true
           },
           "targets": [
             {
