@@ -44,7 +44,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(service_name) (count_over_time({service_name=~\".+\"} [$__range]))",
+              "expr": "sum by(service_name) (count_over_time({service_name=~\"$service\"} [$__range]))",
               "legendFormat": "{{service_name}}",
               "queryType": "range",
               "refId": "A"
@@ -102,7 +102,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(service_name) (rate({service_name=~\".+\", detected_level=~\"error|critical|emerg\"} [$__interval]))",
+              "expr": "sum by(service_name) (rate({service_name=~\"$service\", detected_level=~\"error|critical|emerg\"} [$__interval]))",
               "legendFormat": "{{service_name}}",
               "queryType": "range",
               "refId": "A"
@@ -146,18 +146,15 @@ data:
       "templating": {
         "list": [
           {
-            "current": {},
             "datasource": { "type": "loki", "uid": "loki" },
-            "definition": "",
             "hide": 0,
             "includeAll": true,
             "allValue": ".+",
             "multi": true,
             "name": "service",
-            "options": [],
             "query": "label_values(service_name)",
             "refresh": 2,
-            "regex": "",
+            "regex": "^(?!fluent-bit$|fluentbit$).+",
             "skipUrlSync": false,
             "sort": 3,
             "type": "query"
