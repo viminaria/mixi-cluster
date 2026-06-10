@@ -34,7 +34,7 @@ data:
             "minVizWidth": 0,
             "orientation": "horizontal",
             "reduceOptions": {
-              "calcs": ["lastNotNull"],
+              "calcs": [],
               "fields": "",
               "values": false
             },
