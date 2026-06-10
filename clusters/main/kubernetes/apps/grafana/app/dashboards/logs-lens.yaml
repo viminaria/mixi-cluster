@@ -44,7 +44,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(service_name) (count_over_time({service_name=~\"$service\"} [$__range]))",
+              "expr": "sum by(service_name) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\"} [$__range]))",
               "legendFormat": "{{service_name}}",
               "queryType": "range",
               "refId": "A"
@@ -102,7 +102,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(service_name) (rate({service_name=~\"$service\", detected_level=~\"error|critical|emerg\"} [$__interval]))",
+              "expr": "sum by(service_name) (rate({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\", detected_level=~\"error|critical|emerg\"} [$__interval]))",
               "legendFormat": "{{service_name}}",
               "queryType": "range",
               "refId": "A"
@@ -133,7 +133,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "{service_name=~\"$service\"}",
+              "expr": "{service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\"}",
               "queryType": "range",
               "refId": "A"
             }
