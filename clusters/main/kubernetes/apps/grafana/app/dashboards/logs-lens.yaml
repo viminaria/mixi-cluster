@@ -49,10 +49,6 @@ data:
               }
             },
             {
-              "id": "seriesToRows",
-              "options": {}
-            },
-            {
               "id": "sortBy",
               "options": {
                 "sort": [
