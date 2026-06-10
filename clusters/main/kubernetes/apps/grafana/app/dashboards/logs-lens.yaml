@@ -154,7 +154,7 @@ data:
             "name": "service",
             "query": "label_values(service_name)",
             "refresh": 2,
-            "regex": "^(?!fluent-bit$|fluentbit$).+",
+            "regex": "^(?!fluent-bit$|fluentbit$|unknown_service$).+",
             "skipUrlSync": false,
             "sort": 3,
             "type": "query"
