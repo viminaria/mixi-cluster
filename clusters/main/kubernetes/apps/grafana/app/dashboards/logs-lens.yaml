@@ -38,9 +38,18 @@ data:
               "fields": "",
               "values": false
             },
-            "showUnfilled": true,
-            "sort": "desc"
+            "showUnfilled": true
           },
+          "transformations": [
+            {
+              "id": "sortBy",
+              "options": {
+                "sort": [
+                  { "field": "Value", "desc": true }
+                ]
+              }
+            }
+          ],
           "targets": [
             {
               "datasource": { "type": "loki", "uid": "loki" },
