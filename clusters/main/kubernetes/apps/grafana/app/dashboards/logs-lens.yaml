@@ -42,6 +42,13 @@ data:
           },
           "transformations": [
             {
+              "id": "reduce",
+              "options": {
+                "reducers": ["lastNotNull"],
+                "includeTimeField": false
+              }
+            },
+            {
               "id": "seriesToRows",
               "options": {}
             },
