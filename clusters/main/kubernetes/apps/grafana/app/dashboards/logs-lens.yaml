@@ -66,8 +66,8 @@ data:
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-"drawStyle": "line",
-"fillOpacity": 15,
+                "drawStyle": "line",
+                "fillOpacity": 15,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
