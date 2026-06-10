@@ -54,7 +54,7 @@ data:
         {
           "datasource": { "type": "loki", "uid": "loki" },
           "id": 2,
-          "title": "Error Rate (last 30m)",
+          "title": "Log Volume by Level",
           "type": "timeseries",
           "fieldConfig": {
             "defaults": {
@@ -66,8 +66,8 @@ data:
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
+                "drawStyle": "bars",
+                "fillOpacity": 80,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -80,7 +80,7 @@ data:
                 "scaleDistribution": { "type": "linear" },
                 "showPoints": "never",
                 "spanNulls": true,
-                "stacking": { "group": "A", "mode": "none" },
+                "stacking": { "group": "A", "mode": "normal" },
                 "thresholdsStyle": { "mode": "off" }
               },
               "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
@@ -91,7 +91,7 @@ data:
           "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
           "options": {
             "legend": {
-              "calcs": ["sum", "max"],
+              "calcs": ["sum"],
               "displayMode": "table",
               "placement": "right",
               "showLegend": true
@@ -102,8 +102,8 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(service_name) (rate({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\", detected_level=~\"error|critical|emerg\"} [$__interval]))",
-              "legendFormat": "{{service_name}}",
+              "expr": "sum by(detected_level) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\"} [$__range]))",
+              "legendFormat": "{{detected_level}}",
               "queryType": "range",
               "refId": "A"
             }
