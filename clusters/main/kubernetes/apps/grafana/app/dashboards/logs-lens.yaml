@@ -113,21 +113,31 @@ data:
           "datasource": { "type": "loki", "uid": "loki" },
           "id": 3,
           "title": "All Logs",
-          "type": "logs",
+          "type": "table",
           "fieldConfig": {
-            "defaults": {},
-            "overrides": []
+            "defaults": {
+              "custom": {
+                "align": "auto"
+              },
+              "displayName": "",
+              "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] }
+            },
+            "overrides": [
+              {
+                "matcher": { "id": "byName", "options": "Line" },
+                "properties": [
+                  { "id": "custom.width", "value": 500 },
+                  { "id": "custom.displayMode", "value": "auto" }
+                ]
+              }
+            ]
           },
           "gridPos": { "h": 16, "w": 24, "x": 0, "y": 8 },
           "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessages": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": true,
-            "sortOrder": "Descending",
-            "wrapLogMessage": true
+            "cellHeight": "sm",
+            "footer": { "show": false },
+            "showHeader": true,
+            "sortBy": [{ "desc": true, "displayName": "Time" }]
           },
           "targets": [
             {
