@@ -15,6 +15,7 @@ data:
       "links": [],
       "panels": [
         {
+          "datasource": { "type": "loki", "uid": "loki" },
           "id": 1,
           "title": "Log Volume by Service",
           "type": "bargauge",
@@ -51,6 +52,7 @@ data:
           ]
         },
         {
+          "datasource": { "type": "loki", "uid": "loki" },
           "id": 2,
           "title": "Error Rate (last 30m)",
           "type": "timeseries",
@@ -108,6 +110,7 @@ data:
           ]
         },
         {
+          "datasource": { "type": "loki", "uid": "loki" },
           "id": 3,
           "title": "All Logs",
           "type": "logs",
@@ -145,17 +148,14 @@ data:
           {
             "current": {},
             "datasource": { "type": "loki", "uid": "loki" },
-            "definition": "label_values(service_name)",
+            "definition": "",
             "hide": 0,
             "includeAll": true,
             "allValue": ".*",
             "multi": true,
             "name": "service",
             "options": [],
-            "query": {
-              "query": "label_values(service_name)",
-              "refId": "StandardVariableQuery"
-            },
+            "query": "label_values(service_name)",
             "refresh": 2,
             "regex": "",
             "skipUrlSync": false,
