@@ -12,22 +12,15 @@ data:
 
     [INPUT]
         Name              tail
-        Path              /var/log/pods/*/*/*.log
-        Exclude_Path      /var/log/pods/logging/fluent-bit-*_*/fluent-bit/*/*.0.log,*/etc/containers/*/storage
-        Tag               kube
-
-    [FILTER]
-        Name                kubernetes
-        Match               kube.*
-        Kube_URL            https://kubernetes.default.svc:443
-        Merge_Log           On
-        K8S-Logging.Parser  On
+        Path              /var/log/containers/*.log
+        Db                /run/fluentbit/flb.db
+        Db.Sync           full
 
     [OUTPUT]
         Name                loki
-        Match               kube.*
-        Host                loki-gateway
+        Match               *
+        Host                loki-gateway.loki.svc.cluster.local
         Port                80
         URI                 /loki/api/v1/push
-        tls                 false
-        auto_kubernetes_labels true
+        tls                 off
+        auto_kubernetes_labels on
