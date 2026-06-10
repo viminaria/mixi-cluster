@@ -38,13 +38,14 @@ data:
               "fields": "",
               "values": false
             },
-            "showUnfilled": true
+            "showUnfilled": true,
+            "sort": "desc"
           },
           "targets": [
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(service_name) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\"} [$__range]))",
+              "expr": "sum by(service_name) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"} [$__range]))",
               "legendFormat": "{{service_name}}",
               "queryType": "range",
               "refId": "A"
@@ -91,7 +92,7 @@ data:
           "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
           "options": {
             "legend": {
-              "calcs": ["sum"],
+              "calcs": ["lastNotNull"],
               "displayMode": "table",
               "placement": "right",
               "showLegend": true
@@ -102,7 +103,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(detected_level) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\"} [$__range]))",
+              "expr": "sum by(detected_level) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"} [$__range]))",
               "legendFormat": "{{detected_level}}",
               "queryType": "range",
               "refId": "A"
@@ -143,7 +144,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "{service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|unknown_service\"}",
+              "expr": "{service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"}",
               "queryType": "range",
               "refId": "A"
             }
@@ -164,7 +165,7 @@ data:
             "name": "service",
             "query": "label_values(service_name)",
             "refresh": 2,
-            "regex": "^(?!fluent-bit$|fluentbit$|unknown_service$).+",
+            "regex": "^(?!fluent-bit$|fluentbit$|loki$|unknown_service$).+",
             "skipUrlSync": false,
             "sort": 3,
             "type": "query"
