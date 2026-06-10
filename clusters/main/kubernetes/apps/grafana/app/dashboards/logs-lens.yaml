@@ -18,7 +18,7 @@ data:
           "datasource": { "type": "loki", "uid": "loki" },
           "id": 1,
           "title": "Log Volume by Service",
-          "type": "bargauge",
+          "type": "stat",
           "fieldConfig": {
             "defaults": {
               "color": { "mode": "continuous-GrYlRd" },
@@ -29,16 +29,16 @@ data:
           },
           "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
           "options": {
-            "displayMode": "gradient",
-            "minVizHeight": 10,
-            "minVizWidth": 0,
-            "orientation": "horizontal",
+            "colorMode": "none",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
             "reduceOptions": {
-              "calcs": ["sum"],
+              "calcs": ["lastNotNull"],
               "fields": "",
               "values": false
             },
-            "showUnfilled": true
+            "textMode": "value_and_name"
           },
           "targets": [
             {
