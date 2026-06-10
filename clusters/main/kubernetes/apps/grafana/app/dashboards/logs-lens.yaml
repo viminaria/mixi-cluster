@@ -42,6 +42,10 @@ data:
           },
           "transformations": [
             {
+              "id": "seriesToRows",
+              "options": {}
+            },
+            {
               "id": "sortBy",
               "options": {
                 "sort": [
