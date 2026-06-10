@@ -127,7 +127,22 @@ data:
                 "matcher": { "id": "byName", "options": "Line" },
                 "properties": [
                   { "id": "custom.width", "value": 500 },
-                  { "id": "custom.displayMode", "value": "auto" }
+                  { "id": "custom.displayMode", "value": "auto" },
+                  { "id": "custom.displayName", "value": "Log line" }
+                ]
+              },
+              {
+                "matcher": { "id": "byName", "options": "app" },
+                "properties": [
+                  { "id": "custom.width", "value": 220 },
+                  { "id": "custom.displayName", "value": "App" }
+                ]
+              },
+              {
+                "matcher": { "id": "byName", "options": "detected_level" },
+                "properties": [
+                  { "id": "custom.displayName", "value": "Level" },
+                  { "id": "custom.width", "value": 80 }
                 ]
               }
             ]
@@ -139,11 +154,65 @@ data:
             "showHeader": true,
             "sortBy": [{ "desc": true, "displayName": "Time" }]
           },
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "source": "labels",
+                "format": "json"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "labels": true,
+                  "tsNs": true,
+                  "labelTypes": true,
+                  "id": true,
+                  "app_kubernetes_io_instance": true,
+                  "app_kubernetes_io_managed_by": true,
+                  "app_kubernetes_io_name": true,
+                  "app_kubernetes_io_version": true,
+                  "helm_revision": true,
+                  "helm_sh_chart": true,
+                  "pod_lifecycle": true,
+                  "pod_name": true,
+                  "pod_template_hash": true,
+                  "kubernetes_annotations_checksum_cnpg": true,
+                  "kubernetes_annotations_checksum_configmaps": true,
+                  "kubernetes_annotations_checksum_mariadb": true,
+                  "kubernetes_annotations_checksum_mongodb": true,
+                  "kubernetes_annotations_checksum_persistence": true,
+                  "kubernetes_annotations_checksum_redis": true,
+                  "kubernetes_annotations_checksum_secrets": true,
+                  "kubernetes_annotations_checksum_services": true,
+                  "kubernetes_annotations_checksum_solr": true,
+                  "kubernetes_host": true,
+                  "kubernetes_container_name": true,
+                  "kubernetes_docker_id": true,
+                  "kubernetes_container_hash": true,
+                  "kubernetes_container_image": true,
+                  "kubernetes_labels_release": true,
+                  "kubernetes_pod_name": true,
+                  "kubernetes_namespace_name": true,
+                  "kubernetes_pod_id": true,
+                  "release": true
+                },
+                "indexByName": {
+                  "Time": 0,
+                  "app": 1,
+                  "detected_level": 2,
+                  "Line": 3
+                }
+              }
+            }
+          ],
           "targets": [
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "{service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"}",
+              "expr": "{service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"} | json | line_format \"{{.log}}\"",
               "queryType": "range",
               "refId": "A"
             }
