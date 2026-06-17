@@ -17,6 +17,10 @@ data:
         Db.Sync           full
 
     [OUTPUT]
-        Name                stdout
+        Name                loki
         Match               *
-        Format              json
+        Host                loki-gateway.loki.svc.cluster.local
+        Port                80
+        URI                 /loki/api/v1/push
+        tls                 off
+        auto_kubernetes_labels on
