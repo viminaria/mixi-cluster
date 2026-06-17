@@ -11,9 +11,10 @@ data:
         Daemon        off
 
     [INPUT]
-        Name              dummy
-        tag                 kube.dummy
-        interval_sec        1
+        Name              tail
+        Path              /var/log/containers/*.log
+        Db                /run/fluentbit/flb.db
+        Db.Sync           full
 
     [OUTPUT]
         Name                stdout
