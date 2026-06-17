@@ -15,30 +15,57 @@ data:
       "links": [],
       "panels": [
         {
-          "datasource": {"type": "loki", "uid": "loki"},
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
           "id": 1,
           "title": "Log Volume by Pod",
           "type": "bargauge",
           "fieldConfig": {
             "defaults": {
-              "color": {"mode": "continuous-GrYlRd"},
-              "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
               "unit": "short"
             },
             "overrides": []
           },
-          "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
           "options": {
             "displayMode": "gradient",
             "minVizHeight": 10,
             "minVizWidth": 0,
             "orientation": "horizontal",
-            "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
             "showUnfilled": true
           },
           "targets": [
             {
-              "datasource": {"type": "loki", "uid": "loki"},
+              "datasource": {
+                "type": "loki",
+                "uid": "loki"
+              },
               "editorMode": "code",
               "expr": "sum by(pod) (count_over_time({job=\"fluent-bit\"} [$__range]))",
               "legendFormat": "{{pod}}",
@@ -48,33 +75,87 @@ data:
           ]
         },
         {
-          "datasource": {"type": "loki", "uid": "loki"},
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
           "id": 2,
           "title": "Log Volume by Container",
           "type": "timeseries",
           "fieldConfig": {
             "defaults": {
-              "color": {"mode": "palette-classic"},
-              "custom": {
-                "axisBorderShow": false, "axisCenteredZero": false, "axisColorMode": "text",
-                "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line",
-                "fillOpacity": 15, "gradientMode": "none", "hideFrom": {"legend": false, "tooltip": false, "viz": false},
-                "lineInterpolation": "smooth", "lineWidth": 1, "pointSize": 5,
-                "scaleDistribution": {"type": "linear"}, "showPoints": "never", "spanNulls": true,
-                "stacking": {"group": "A", "mode": "normal"}, "thresholdsStyle": {"mode": "off"}
+              "color": {
+                "mode": "palette-classic"
               },
-              "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]}
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
             },
             "overrides": []
           },
-          "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
           "options": {
-            "legend": {"calcs": ["lastNotNull"], "displayMode": "table", "placement": "right", "showLegend": true},
-            "tooltip": {"mode": "multi", "sort": "none"}
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
           },
           "targets": [
             {
-              "datasource": {"type": "loki", "uid": "loki"},
+              "datasource": {
+                "type": "loki",
+                "uid": "loki"
+              },
               "editorMode": "code",
               "expr": "sum by(container) (count_over_time({job=\"fluent-bit\"} [$__range]))",
               "legendFormat": "{{container}}",
@@ -84,60 +165,151 @@ data:
           ]
         },
         {
-          "datasource": {"type": "loki", "uid": "loki"},
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
           "id": 3,
           "title": "All Logs",
           "type": "table",
           "fieldConfig": {
             "defaults": {
-              "custom": {"align": "auto"},
+              "custom": {
+                "align": "auto"
+              },
               "displayName": "",
-              "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]}
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
             },
             "overrides": [
-              {"matcher": {"id": "byName", "options": "Line"}, "properties": [{"id": "custom.width", "value": 500}, {"id": "custom.displayMode", "value": "auto"}]},
-              {"matcher": {"id": "byName", "options": "pod_name"}, "properties": [{"id": "custom.width", "value": 220}]},
-              {"matcher": {"id": "byName", "options": "namespace"}, "properties": [{"id": "custom.width", "value": 180}]}
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Time"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 120
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Log"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 700
+                  },
+                  {
+                    "id": "custom.displayMode",
+                    "value": "auto"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "pod_name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 180
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "namespace_name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 150
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "container_name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 130
+                  }
+                ]
+              }
             ]
           },
-          "gridPos": {"h": 16, "w": 24, "x": 0, "y": 8},
+          "gridPos": {
+            "h": 16,
+            "w": 24,
+            "x": 0,
+            "y": 8
+          },
           "options": {
             "cellHeight": "sm",
-            "footer": {"show": false},
+            "footer": {
+              "show": false
+            },
             "showHeader": true,
-            "sortBy": [{"desc": true, "displayName": "Time"}]
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Time"
+              }
+            ]
           },
           "transformations": [
-            {"id": "extractFields", "options": {"source": "labels", "format": "json"}},
-            {"id": "organize", "options": {
-              "excludeByName": {
-                "labels": true, "tsNs": true, "labelTypes": true, "id": true,
-                "job": true, "container_name": true,
-                "app_kubernetes_io_instance": true, "app_kubernetes_io_managed_by": true,
-                "app_kubernetes_io_name": true, "app_kubernetes_io_version": true,
-                "helm_revision": true, "helm_sh_chart": true, "pod_lifecycle": true,
-                "pod_template_hash": true, "release": true,
-                "kubernetes_annotations_checksum_cnpg": true,
-                "kubernetes_annotations_checksum_configmaps": true,
-                "kubernetes_annotations_checksum_mariadb": true,
-                "kubernetes_annotations_checksum_mongodb": true,
-                "kubernetes_annotations_checksum_persistence": true,
-                "kubernetes_annotations_checksum_redis": true,
-                "kubernetes_annotations_checksum_secrets": true,
-                "kubernetes_annotations_checksum_services": true,
-                "kubernetes_annotations_checksum_solr": true,
-                "kubernetes_annotations_checksum_host_path": true
-              },
-              "indexByName": {
-                "Time": 0, "pod_name": 1, "namespace": 2, "Line": 3
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "labels": true,
+                  "tsNs": true,
+                  "labelTypes": true,
+                  "id": true,
+                  "app_kubernetes_io_instance": true,
+                  "app_kubernetes_io_managed_by": true,
+                  "app_kubernetes_io_name": true,
+                  "app_kubernetes_io_version": true,
+                  "helm_revision": true,
+                  "helm_sh_chart": true,
+                  "pod_lifecycle": true,
+                  "pod_template_hash": true,
+                  "release": true
+                },
+                "indexByName": {
+                  "Time": 0,
+                  "namespace_name": 1,
+                  "container_name": 2,
+                  "Log": 3
+                }
               }
-            }}
+            }
           ],
           "targets": [
             {
-              "datasource": {"type": "loki", "uid": "loki"},
+              "datasource": {
+                "type": "loki",
+                "uid": "loki"
+              },
               "editorMode": "code",
-              "expr": "{job=\"fluent-bit\"} | line_format \"{{.line}}\"",
+              "expr": "{job=\"fluent-bit\"} | logfmt",
               "queryType": "range",
               "refId": "A"
             }
@@ -146,9 +318,17 @@ data:
       ],
       "refresh": "30s",
       "schemaVersion": 38,
-      "tags": ["kubernetes", "logs"],
-      "templating": {"list": []},
-      "time": {"from": "now-6h", "to": "now"},
+      "tags": [
+        "kubernetes",
+        "logs"
+      ],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
       "timepicker": {},
       "timezone": "",
       "title": "Log Lens"
