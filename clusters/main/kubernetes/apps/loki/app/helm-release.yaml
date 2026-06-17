@@ -61,6 +61,7 @@ spec:
         ingestion_burst_size_mb: 200
         max_log_size_per_line: 512000
         volume_enabled: true
+        max_ingestion_age: 30d
       schemaConfig:
         configs:
         - from: '2024-04-01'
