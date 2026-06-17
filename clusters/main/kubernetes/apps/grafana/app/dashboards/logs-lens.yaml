@@ -8,51 +8,79 @@ metadata:
 data:
   log-lens.json: |
     {
-      "editable": true,
-      "fiscalYearStartMonth": 0,
-      "graphTooltip": 0,
       "panels": [
         {
+          "datasource": {"type": "loki", "uid": "loki"},
           "id": 1,
           "title": "Log Volume by Pod",
           "type": "bargauge",
+          "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+          "options": {
+            "displayMode": "gradient",
+            "showUnfilled": true,
+            "reduceOptions": {"calcs": ["lastNotNull"]}
+          },
           "targets": [
             {
+              "datasource": {"type": "loki", "uid": "loki"},
               "editorMode": "code",
-              "expr": "sum by(pod) (count_over_time({job=\"fluent-bit\"$ns} [$__range]))",
+              "expr": "sum by(pod) (count_over_time({job=\"fluent-bit\"} [$__range]))",
+              "legendFormat": "{{pod}}",
               "queryType": "range"
             }
           ]
         },
         {
+          "datasource": {"type": "loki", "uid": "loki"},
           "id": 2,
           "title": "Log Volume by Container",
           "type": "timeseries",
+          "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+          "options": {
+            "legend": {"displayMode": "table", "placement": "right"},
+            "tooltip": {"mode": "multi"}
+          },
           "targets": [
             {
+              "datasource": {"type": "loki", "uid": "loki"},
               "editorMode": "code",
-              "expr": "sum by(container) (count_over_time({job=\"fluent-bit\"$ns} [$__range]))",
+              "expr": "sum by(container) (count_over_time({job=\"fluent-bit\"} [$__range]))",
+              "legendFormat": "{{container}}",
               "queryType": "range"
             }
           ]
         },
         {
+          "datasource": {"type": "loki", "uid": "loki"},
           "id": 3,
           "title": "All Logs",
           "type": "table",
+          "gridPos": {"h": 16, "w": 24, "x": 0, "y": 8},
+          "options": {
+            "cellHeight": "sm",
+            "showHeader": true,
+            "sortBy": [{"desc": true, "displayName": "Time"}]
+          },
+          "fieldConfig": {
+            "defaults": {"custom": {"align": "auto"}},
+            "overrides": [
+              {"matcher": {"id": "byName", "options": "Log"}, "properties": [
+                {"id": "custom.width", "value": 600},
+                {"id": "custom.displayMode", "value": "auto"}
+              ]}
+            ]
+          },
           "transformations": [
             {
               "id": "extractFields",
-              "options": {
-                "source": "Line",
-                "format": "logfmt"
-              }
+              "options": {"source": "Line", "format": "logfmt"}
             }
           ],
           "targets": [
             {
+              "datasource": {"type": "loki", "uid": "loki"},
               "editorMode": "code",
-              "expr": "{job=\"fluent-bit\"$ns} | logfmt",
+              "expr": "{job=\"fluent-bit\"} | logfmt",
               "queryType": "range"
             }
           ]
@@ -61,40 +89,20 @@ data:
       "templating": {
         "list": [
           {
-            "name": "ns",
-            "type": "custom",
-            "hide": 0,
-            "current": {
-              "text": "",
-              "value": ""
-            },
-            "options": [
-              {
-                "text": "All namespaces",
-                "value": ""
-              }
-            ],
-            "query": "",
-            "multi": false
-          },
-          {
-            "name": "namespace_filter",
-            "type": "query",
-            "datasource": {
-              "type": "loki",
-              "uid": "loki"
-            },
+            "datasource": {"type": "loki", "uid": "loki"},
+            "name": "pod_filter",
             "hide": 0,
             "includeAll": true,
-            "allValue": "",
-            "multi": true,
-            "label": "Namespace",
+            "allValue": ".+",
+            "multi": false,
+            "label": "Pod",
+            "query": "label_values(pod)",
             "refresh": 2,
-            "query": "(~\"blocky\",~\"cert-manager\",~\"cloudflareddns\",~\"cloudnative-pg\",~\"flux-system\",~\"frigate\",~\"grafana\",~\"home-assistant\",~\"kube-prometheus-stack\",~\"kubernetes-dashboard\",~\"kubernetes-reflector\",~\"kube-system\",~\"kyverno\",~\"llmkube-system\",~\"logging\",~\"loki\",~\"longhorn-system\",~\"metallb\",~\"minecraft\",~\"n8n\",~\"nginx-external\",~\"nginx-internal\",~\"nvidia-device-plugin\",~\"ollama\",~\"openebs\",~\"ozrates-static\",~\"searxng\",~\"snapshot-controller\",~\"spegel\",~\"spoolman\",~\"system-upgrade\",~\"uptime-kuma\",~\"valkey\",~\"viminariacom-static\",~\"volsync\",~\"wg-easy\")",
-            "sort": 1,
-            "tagValuesExpr": ""
+            "sort": 3,
+            "type": "query"
           }
         ]
       },
+      "time": {"from": "now-6h", "to": "now"},
       "title": "Log Lens"
     }
