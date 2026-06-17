@@ -7,7 +7,7 @@ data:
   fluent-bit.conf: |
     [SERVICE]
         Flush         5
-        Log_Level     debug
+        Log_Level    debug
         Daemon        off
 
     [INPUT]
