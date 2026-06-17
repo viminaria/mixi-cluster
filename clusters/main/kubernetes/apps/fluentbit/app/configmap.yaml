@@ -19,7 +19,7 @@ data:
     [OUTPUT]
         Name                loki
         Match               *
-        Host                loki.loki.svc.cluster.local
+        Host                172.17.16.29
         Port                3100
         URI                 /loki/api/v1/push
         tls                 off
