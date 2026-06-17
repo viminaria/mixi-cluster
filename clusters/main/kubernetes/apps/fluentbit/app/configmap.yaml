@@ -16,6 +16,13 @@ data:
         Db                /run/fluentbit/flb.db
         Db.Sync           full
 
+    [FILTER]
+        Name                parser
+        Match               *
+        Key_Name            log
+        Parser            containerd
+        Reserve_Data       true
+
     [OUTPUT]
         Name                loki
         Match               *
