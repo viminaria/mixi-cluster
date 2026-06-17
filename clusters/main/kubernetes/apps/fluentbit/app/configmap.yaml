@@ -7,19 +7,15 @@ data:
   fluent-bit.conf: |
     [SERVICE]
         Flush         5
-        Log_Level     info
+        Log_Level     debug
         Daemon        off
 
     [INPUT]
-        Name              tail
-        Path              /var/log/containers/*.log
-        Db                /run/fluentbit/flb.db
-        Db.Sync           full
+        Name              dummy
+        tag                 kube.dummy
+        interval            1
 
     [OUTPUT]
-        Name                loki
+        Name                stdout
         Match               *
-        Host                loki-gateway.loki.svc.cluster.local
-        Port                80
-        URI                 /loki/api/v1/push
-        tls                 off
+        Format              json
