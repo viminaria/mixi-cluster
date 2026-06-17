@@ -7,13 +7,13 @@ data:
   fluent-bit.conf: |
     [SERVICE]
         Flush         5
-        Log_Level    debug
+        Log_Level     info
         Daemon        off
 
     [INPUT]
         Name              dummy
         tag                 kube.dummy
-        interval            1
+        interval_sec        1
 
     [OUTPUT]
         Name                stdout
