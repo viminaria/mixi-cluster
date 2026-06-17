@@ -44,8 +44,8 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(service_name) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"} [$__range]))",
-              "legendFormat": "{{service_name}}",
+              "expr": "sum by(app) (count_over_time({app=~\"$service\", app!~\"fluent-bit|fluentbit|loki|unknown_service|pod|container|namespace|node\"} [$__range]))",
+              "legendFormat": "{{app}}",
               "queryType": "range",
               "refId": "A"
             }
@@ -102,7 +102,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "sum by(detected_level) (count_over_time({service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"} [$__range]))",
+              "expr": "sum by(detected_level) (count_over_time({app=~\"$service\", app!~\"fluent-bit|fluentbit|loki|unknown_service|pod|container|namespace|node\"} [$__range]))",
               "legendFormat": "{{detected_level}}",
               "queryType": "range",
               "refId": "A"
@@ -170,6 +170,12 @@ data:
                   "tsNs": true,
                   "labelTypes": true,
                   "id": true,
+                  "job": true,
+                  "release": true,
+                  "namespace": true,
+                  "pod_name": true,
+                  "container_name": true,
+                  "deployment_name": true,
                   "app_kubernetes_io_instance": true,
                   "app_kubernetes_io_managed_by": true,
                   "app_kubernetes_io_name": true,
@@ -177,7 +183,6 @@ data:
                   "helm_revision": true,
                   "helm_sh_chart": true,
                   "pod_lifecycle": true,
-                  "pod_name": true,
                   "pod_template_hash": true,
                   "kubernetes_annotations_checksum_cnpg": true,
                   "kubernetes_annotations_checksum_configmaps": true,
@@ -212,7 +217,7 @@ data:
             {
               "datasource": { "type": "loki", "uid": "loki" },
               "editorMode": "code",
-              "expr": "{service_name=~\"$service\", service_name!~\"fluent-bit|fluentbit|loki|unknown_service\"} | json | line_format \"{{.log}}\"",
+              "expr": "{app=~\"$service\", app!~\"fluent-bit|fluentbit|loki|unknown_service|pod|container|namespace|node\"} | json | line_format \"{{.log}}\"",
               "queryType": "range",
               "refId": "A"
             }
@@ -231,7 +236,7 @@ data:
             "allValue": ".+",
             "multi": true,
             "name": "service",
-            "query": "label_values(service_name)",
+            "query": "label_values(app)",
             "refresh": 2,
             "regex": "^(?!fluent-bit$|fluentbit$|loki$|unknown_service$).+",
             "skipUrlSync": false,
