@@ -16,15 +16,6 @@ data:
         Db                /run/fluentbit/flb.db
         Db.Sync           full
 
-    [FILTER]
-        Name                kubernetes
-        Match               *
-        Kube_URL            https://kubernetes.default.svc:443
-        Kube_Tag_Prepend    application/
-        Merge_Log           On
-        Keep_Log            Off
-        K8S-Logging.Exclude On
-
     [OUTPUT]
         Name                loki
         Match               *
@@ -33,4 +24,3 @@ data:
         URI                 /loki/api/v1/push
         tls                 off
         auto_kubernetes_labels on
-        label_keys          namespace_name
