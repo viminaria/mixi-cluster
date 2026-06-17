@@ -24,3 +24,4 @@ data:
         URI                 /loki/api/v1/push
         tls                 off
         auto_kubernetes_labels on
+        label_keys            kubernetes.labels.app,kubernetes.labels.job,kubernetes.labels.release
