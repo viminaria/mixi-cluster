@@ -17,4 +17,4 @@ spec:
   images:
     - name: ghcr.io/defilantech/llmkube-controller
       newName: ghcr.io/defilantech/llmkube-controller
-      newTag: 0.8.8
+      newTag: 0.8.9
