@@ -18,6 +18,4 @@ resources:
   # - nextcloud/ks.yaml
   - home-assistant/ks.yaml
   - valkey/ks.yaml
-  - loki/ks.yaml
-  - fluentbit/ks.yaml
   - n8n/ks.yaml
