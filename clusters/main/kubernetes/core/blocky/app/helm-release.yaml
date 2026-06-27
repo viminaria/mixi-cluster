@@ -53,13 +53,10 @@ spec:
           - name: tls_servername
             value: cloudflare-dns.com
     defaultUpstreams:
-      - tls://1.1.1.1:853
-      - tls://dns.google:853
-      - https://dns.google/dns-query
-      - https://cloudflare-dns.com/dns-query
-      - https://dns.cloudflare.com/dns-query
+      - https://dns.quad9.net/dns-query
       - tls://dns.mullvad.net
       - https://dns.mullvad.net/dns-query
+      - https://cloudflare-dns.com/dns-query
     caching:
       minTime: 5m
       maxTime: 30m
