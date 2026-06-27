@@ -54,17 +54,25 @@ spec:
             value: cloudflare-dns.com
     defaultUpstreams:
       - https://dns.quad9.net/dns-query
-      - tls://dns.mullvad.net
       - https://dns.mullvad.net/dns-query
       - https://cloudflare-dns.com/dns-query
     caching:
-      minTime: 5m
-      maxTime: 30m
+      minTime: 30m
+      maxTime: 1h
       prefetchExpires: 2m
-      prefetchThreshold: 3
+      prefetchThreshold: 2
       prefetchMaxItemsCount: 1000
     upstreamTimeout: 2s
     logLevel: warn
+    blacklist:
+      - name: custom
+        lists:
+          - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/tif.txt
+    clientGroupsBlock:
+      - name: default
+        groups:
+          - default
+          - custom
     configmap:
       dashboard:
         enabled: false
