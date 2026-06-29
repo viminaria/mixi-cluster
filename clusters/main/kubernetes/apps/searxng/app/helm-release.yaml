@@ -50,8 +50,3 @@ spec:
             certificateIssuer: domain-0-le-prod
         hosts:
           - host: search.${DOMAIN_0}
-    persistence:
-      config:
-        type: nfs
-        path: ${SEARXNG_NFS_PATH}
-        server: ${PROXMOX_IP}
