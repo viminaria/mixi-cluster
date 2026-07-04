@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: piper
-          image: huggingface/piper-tts
+          image: ghcr.io/ohf-voice/piper:latest
           ports:
             - containerPort: 5000
               name: http
