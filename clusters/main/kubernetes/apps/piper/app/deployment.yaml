@@ -16,21 +16,15 @@ spec:
     spec:
       containers:
         - name: piper
-          image: ghcr.io/rhasspy/piper:latest
+          image: python:3.12-slim
+          command: ["sh", "-c", "pip install --quiet piper-tts flask && exec piper server --host 0.0.0.0 --port 5000"]
           ports:
             - containerPort: 5000
               name: http
           resources:
             requests:
               cpu: 100m
-              memory: 256Mi
+              memory: 512Mi
             limits:
               cpu: "1"
-              memory: 512Mi
- 
-          volumeMounts:
-            - name: voices
-              mountPath: /root/.local/share/piper
-      volumes:
-        - name: voices
-          emptyDir: {}
+              memory: 1Gi
