@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: piper
-          image: ghcr.io/ohf-voice/piper:latest
+          image: ghcr.io/rhasspy/piper:latest
           ports:
             - containerPort: 5000
               name: http
