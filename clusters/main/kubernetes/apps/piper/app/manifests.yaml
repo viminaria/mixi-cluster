@@ -1,9 +1,11 @@
 ---
+# Namespace
 apiVersion: v1
 kind: Namespace
 metadata:
   name: piper
 ---
+# Persistent volume claim for model storage
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -17,6 +19,7 @@ spec:
     requests:
       storage: 2Gi
 ---
+# Deployment with init container to download the voice model
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -32,16 +35,26 @@ spec:
       labels:
         app: piper
     spec:
-      containers:
-        - name: piper
+      initContainers:
+        - name: download-voice
           image: python:3.12-slim
-          command: ["sh", "-c", "pip install --quiet piper-tts flask && exec python3 -m piper.http_server --host 0.0.0.0 --port 5000 -m /models/en_US-libritts-high.onnx"]
-          ports:
-            - containerPort: 5000
-              name: http
+          command: ["sh", "-c", "pip install --quiet piper-tts && python3 -m piper.download_voices --download-dir /models en_US-libritts-high"]
           env:
             - name: PIP_BREAK_SYSTEM_PACKAGES
               value: "1"
+          volumeMounts:
+            - name: models
+              mountPath: /models
+      containers:
+        - name: piper
+          image: python:3.12-slim
+          command: ["sh", "-c", "pip install --quiet piper-tts flask && exec python3 -m piper.http_server --host 0.0.0.0 --port 5000 -m /models/en_US-libritts-high"]
+          env:
+            - name: PIP_BREAK_SYSTEM_PACKAGES
+              value: "1"
+          ports:
+            - containerPort: 5000
+              name: http
           resources:
             requests:
               cpu: 100m
@@ -57,6 +70,7 @@ spec:
           persistentVolumeClaim:
             claimName: piper-models
 ---
+# Service to expose Piper HTTP API
 apiVersion: v1
 kind: Service
 metadata:
