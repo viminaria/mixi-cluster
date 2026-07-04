@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: piper
+  namespace: piper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: piper
+  template:
+    metadata:
+      labels:
+        app: piper
+    spec:
+      containers:
+        - name: piper
+          image: huggingface/piper-tts
+          ports:
+            - containerPort: 5000
+              name: http
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+ 
+          volumeMounts:
+            - name: voices
+              mountPath: /root/.local/share/piper
+      volumes:
+        - name: voices
+          emptyDir: {}
