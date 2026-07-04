@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: piper
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: piper-models
+  namespace: piper
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: piper
+  namespace: piper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: piper
+  template:
+    metadata:
+      labels:
+        app: piper
+    spec:
+      containers:
+        - name: piper
+          image: python:3.12-slim
+          command: ["sh", "-c", "pip install --quiet piper-tts flask && exec python3 -m piper.http_server --host 0.0.0.0 --port 5000 -m /models/en_US-libritts-high.onnx"]
+          ports:
+            - containerPort: 5000
+              name: http
+          env:
+            - name: PIP_BREAK_SYSTEM_PACKAGES
+              value: "1"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          volumeMounts:
+            - name: models
+              mountPath: /models
+      volumes:
+        - name: models
+          persistentVolumeClaim:
+            claimName: piper-models
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: piper
+  namespace: piper
+spec:
+  selector:
+    app: piper
+  ports:
+    - port: 5000
+      targetPort: 5000
+      name: http
