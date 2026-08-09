@@ -1,0 +1,12 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: llmkube-crds
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: clusters/main/kubernetes/system/llmkube/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: cluster

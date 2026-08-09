@@ -13,6 +13,7 @@ resources:
   - system-upgrade-controller/ks.yaml
   - volsync/ks.yaml
   - llmkube/ks.yaml
+  - llmkube/app/ks.yaml
   - nvidia-device-plugin/ks.yaml
   - kyverno/ks.yaml
   - kyverno/policies/ks.yaml
