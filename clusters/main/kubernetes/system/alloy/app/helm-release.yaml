@@ -81,6 +81,9 @@ spec:
           loki.source.file "pod_logs" {
             targets    = discovery.relabel.pod_logs.output
             forward_to = [loki.write.loki.receiver]
+            filematch {
+              enabled = true
+            }
           }
 
           loki.write "loki" {
