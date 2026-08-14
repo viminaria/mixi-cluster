@@ -18,3 +18,5 @@ resources:
   - kyverno/ks.yaml
   - kyverno/policies/ks.yaml
   - fstrim/ks.yaml
+  - loki/ks.yaml
+  - alloy/ks.yaml

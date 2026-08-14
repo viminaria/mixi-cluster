@@ -15,4 +15,5 @@ resources:
   - truecharts.yaml
   - kyverno.yaml
   - grafana-community.yaml
+  - grafana.yaml
 # more goes here!
