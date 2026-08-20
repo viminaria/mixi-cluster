@@ -9,3 +9,4 @@ resources:
   - models
   - networking
   - system
+  - observability
