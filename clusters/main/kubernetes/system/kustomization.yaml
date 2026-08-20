@@ -19,3 +19,4 @@ resources:
   - fstrim/ks.yaml
   - loki/ks.yaml
   - alloy/ks.yaml
+  - system-upgrade
