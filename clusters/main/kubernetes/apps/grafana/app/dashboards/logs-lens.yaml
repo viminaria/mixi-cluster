@@ -1,0 +1,158 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-lens
+  namespace: grafana
+  labels:
+    grafana_dashboard: "1"
+data:
+  log-lens.json: |
+    {
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "id": 1,
+          "title": "Log Volume by Pod",
+          "type": "bargauge",
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "options": {
+            "displayMode": "gradient",
+            "showUnfilled": true,
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "loki"
+              },
+              "editorMode": "code",
+              "expr": "sum by(namespace, container) (count_over_time({namespace=~\"$namespace\"} [$__range]))",
+              "legendFormat": "{{namespace}}/{{container}}",
+              "queryType": "range"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "id": 2,
+          "title": "Log Volume by Namespace",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "options": {
+            "legend": {
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "loki"
+              },
+              "editorMode": "code",
+              "expr": "sum by(namespace) (count_over_time({namespace=~\"$namespace\"} [$__range]))",
+              "legendFormat": "{{namespace}}",
+              "queryType": "range"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "All Logs",
+          "type": "table",
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "source": "labels",
+                "format": "json"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "filename": true,
+                  "labels": true,
+                  "tsNs": true,
+                  "labelTypes": true,
+                  "Line": true,
+                  "pod_lifecycle": true,
+                  "app_kubernetes_io_name": true,
+                  "release": true,
+                  "app_kubernetes_io_instance": false
+                },
+                "indexByName": {
+                  "Time": 0,
+                  "namespace": 1,
+                  "container": 2,
+                  "pod": 3,
+                  "Line": 4
+                }
+              }
+            }
+          ],
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "loki"
+              },
+              "editorMode": "code",
+              "expr": "{namespace=~\"$namespace\"}",
+              "queryType": "range"
+            }
+          ]
+        }
+      ],
+      "templating": {
+        "list": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "loki"
+            },
+            "name": "namespace",
+            "hide": 0,
+            "includeAll": true,
+            "allValue": ".+",
+            "multi": true,
+            "label": "Namespace",
+            "query": "label_values(namespace)",
+            "refresh": 2,
+            "sort": 3,
+            "type": "query"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "title": "Log Lens"
+    }
