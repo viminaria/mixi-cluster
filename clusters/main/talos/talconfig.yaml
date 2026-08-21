@@ -1,6 +1,6 @@
 clusterName: ${CLUSTERNAME}
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.13.7
+talosVersion: v1.13.9
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.36.2
 endpoint: https://${VIP}:6443
@@ -28,12 +28,13 @@ nodes:
       controlPlane: true
       nameservers:
         - 1.1.1.1
-        - 9.9.9.9
+        - 8.8.8.8
       installDiskSelector:
         size: <= 1600GB
       networkInterfaces:
         # suffix is the adapter mac adres.
-        - interface: eth0
+        - deviceSelector:
+            driver: virtio_net
           addresses:
             - ${MASTER1IP_CIDR}
           routes:
@@ -67,6 +68,7 @@ controlPlane:
                 officialExtensions:
                     - siderolabs/util-linux-tools
                     - siderolabs/iscsi-tools
+                    - siderolabs/qemu-guest-agent
     machineFiles:
     - content: |
         [plugins."io.containerd.cri.v1.images"]
@@ -97,6 +99,7 @@ worker:
                 officialExtensions:
                     - siderolabs/util-linux-tools
                     - siderolabs/iscsi-tools
+                    - siderolabs/qemu-guest-agent
     machineFiles:
     - content: |
         [plugins."io.containerd.cri.v1.images"]
