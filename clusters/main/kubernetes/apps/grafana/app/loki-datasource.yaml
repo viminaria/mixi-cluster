@@ -13,7 +13,9 @@ data:
       - name: Loki
         type: loki
         access: proxy
-        url: http://loki.loki.svc.cluster.local:3100
+        uid: loki
+        url: http://loki-gateway.loki.svc.cluster.local
         jsonData:
           maxLines: 1000
+          tlsSkipVerify: true
         isDefault: false

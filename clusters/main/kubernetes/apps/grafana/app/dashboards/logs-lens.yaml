@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,28 +9,51 @@ metadata:
 data:
   log-lens.json: |
     {
+      "annotations": {
+        "list": []
+      },
+      "editable": true,
+      "graphTooltip": 0,
+      "links": [],
       "panels": [
         {
           "datasource": {
             "type": "loki",
             "uid": "loki"
           },
-          "id": 1,
-          "title": "Log Volume by Pod",
-          "type": "bargauge",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "lines",
+                "fillOpacity": 10,
+                "lineWidth": 1,
+                "showPoints": "never"
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
           "gridPos": {
-            "h": 8,
-            "w": 12,
+            "h": 10,
+            "w": 24,
             "x": 0,
             "y": 0
           },
+          "id": 2,
           "options": {
-            "displayMode": "gradient",
-            "showUnfilled": true,
-            "reduceOptions": {
+            "legend": {
               "calcs": [
-                "lastNotNull"
-              ]
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Total",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
             }
           },
           "targets": [
@@ -39,34 +63,35 @@ data:
                 "uid": "loki"
               },
               "editorMode": "code",
-              "expr": "sum by(namespace, container) (count_over_time({namespace=~\"$namespace\"} [$__range]))",
-              "legendFormat": "{{namespace}}/{{container}}",
-              "queryType": "range"
+              "expr": "sum by (pod) (count_over_time({namespace=~\"$namespace\"}[$__interval]))",
+              "legendFormat": "{{pod}}",
+              "queryType": "range",
+              "refId": "A"
             }
-          ]
+          ],
+          "title": "Log volume by pod (logs/min)",
+          "type": "timeseries"
         },
         {
           "datasource": {
             "type": "loki",
             "uid": "loki"
           },
-          "id": 2,
-          "title": "Log Volume by Namespace",
-          "type": "timeseries",
           "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 0
+            "h": 26,
+            "w": 24,
+            "x": 0,
+            "y": 10
           },
+          "id": 1,
           "options": {
-            "legend": {
-              "displayMode": "table",
-              "placement": "right"
-            },
-            "tooltip": {
-              "mode": "multi"
-            }
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
           },
           "targets": [
             {
@@ -75,77 +100,56 @@ data:
                 "uid": "loki"
               },
               "editorMode": "code",
-              "expr": "sum by(namespace) (count_over_time({namespace=~\"$namespace\"} [$__range]))",
-              "legendFormat": "{{namespace}}",
-              "queryType": "range"
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "title": "All Logs",
-          "type": "table",
-          "transformations": [
-            {
-              "id": "extractFields",
-              "options": {
-                "source": "labels",
-                "format": "json"
-              }
-            },
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "filename": true,
-                  "labels": true,
-                  "tsNs": true,
-                  "labelTypes": true,
-                  "Line": true,
-                  "pod_lifecycle": true,
-                  "app_kubernetes_io_name": true,
-                  "release": true,
-                  "app_kubernetes_io_instance": false
-                },
-                "indexByName": {
-                  "Time": 0,
-                  "namespace": 1,
-                  "container": 2,
-                  "pod": 3,
-                  "Line": 4
-                }
-              }
+              "expr": "{namespace=~\"$namespace\", pod=~\"$pod\"}",
+              "queryType": "range",
+              "refId": "A"
             }
           ],
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "loki"
-              },
-              "editorMode": "code",
-              "expr": "{namespace=~\"$namespace\"}",
-              "queryType": "range"
-            }
-          ]
+          "title": "Pod Logs",
+          "type": "logs"
         }
+      ],
+      "refresh": "30s",
+      "schemaVersion": 39,
+      "tags": [
+        "logs",
+        "kubernetes"
       ],
       "templating": {
         "list": [
           {
+            "current": {},
             "datasource": {
               "type": "loki",
               "uid": "loki"
             },
-            "name": "namespace",
-            "hide": 0,
             "includeAll": true,
-            "allValue": ".+",
+            "allValue": ".*",
             "multi": true,
-            "label": "Namespace",
+            "name": "namespace",
             "query": "label_values(namespace)",
             "refresh": 2,
-            "sort": 3,
+            "sort": 1,
+            "type": "query"
+          },
+          {
+            "current": {},
+            "datasource": {
+              "type": "loki",
+              "uid": "loki"
+            },
+            "definition": "label_values({namespace=~\"$namespace\"}, pod)",
+            "includeAll": true,
+            "allValue": ".*",
+            "multi": true,
+            "name": "pod",
+            "query": {
+              "label": "pod",
+              "stream": "{namespace=~\"$namespace\"}",
+              "type": 1
+            },
+            "refresh": 2,
+            "sort": 1,
             "type": "query"
           }
         ]
@@ -154,5 +158,8 @@ data:
         "from": "now-6h",
         "to": "now"
       },
-      "title": "Log Lens"
+      "timepicker": {},
+      "timezone": "",
+      "title": "Pod Logs",
+      "uid": "log-lens"
     }
