@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
   - searxng/ks.yaml
-  # - wg-easy/ks.yaml
+  - wg-easy/ks.yaml
   - cloudflareddns/ks.yaml
   - borealis/ks.yaml
   - minecraft-java/ks.yaml
