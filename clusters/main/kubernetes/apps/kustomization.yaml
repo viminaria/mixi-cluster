@@ -10,12 +10,12 @@ resources:
   - minecraft-router/ks.yaml
   - ollama/ks.yaml
   - ozrates-static/ks.yaml
-  - spoolman/ks.yaml
-  - uptime-kuma/ks.yaml
+  # - spoolman/ks.yaml
+  # - uptime-kuma/ks.yaml
   - viminariacom-static/ks.yaml
   - frigate/ks.yaml
   - grafana/ks.yaml
   # - nextcloud/ks.yaml
-  - home-assistant/ks.yaml
+  # - home-assistant/ks.yaml
   - valkey/ks.yaml
   - n8n/ks.yaml
