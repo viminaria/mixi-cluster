@@ -5,7 +5,8 @@ metadata:
   name: qwen3-6-35b-a3b-mtp
   namespace: llmkube-system
 spec:
-  source: https://huggingface.co/byteshape/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/Qwen3.6-35B-A3B-IQ4_XS-3.97bpw.gguf
+  # source: https://huggingface.co/byteshape/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/Qwen3.6-35B-A3B-IQ4_XS-3.97bpw.gguf
+  source: https://huggingface.co/peculiar-ragdoll/Nail-Qwen3.6-35B-A3B-GGUF-MTP/resolve/main/Nail-Qwen3.6-35B-A3B-MTP-UD-IQ4_XS.gguf
   format: gguf
   quantization: IQ4_XS
   hardware:
