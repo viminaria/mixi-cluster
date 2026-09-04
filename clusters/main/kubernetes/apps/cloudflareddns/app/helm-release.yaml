@@ -52,3 +52,6 @@ spec:
         - domain: mc.${DOMAIN_0}
           zone: ${ZONE_ID}
           record: A
+        - domain: valheim.${DOMAIN_0}
+          zone: ${ZONE_ID}
+          record: A
