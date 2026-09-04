@@ -28,30 +28,15 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    image:
-      repository: ghcr.io/hotio/cloudflareddns
-      pullPolicy: IfNotPresent
-      tag: latest@sha256:0ccd6988c1abd1c8e5f99697791f25fcf63b6660d381b459407120f80790d44c
-    securityContext:
-      container:
-        runAsNonRoot: false
-        readOnlyRootFilesystem: false
-        runAsUser: 0
-        runAsGroup: 0
-    cloudflareddns:
-      user: ${DOMAIN_0_EMAIL}
-      api_token: ${DOMAIN_0_CLOUDFLARE_TOKEN}
-      interval: 300
-      detect_mode: dig-whoami.cloudflare
-      detect:override: ""
-      log_level: 3
-      host_zone_record:
-        - domain: ${DDNS_URL}
-          zone: ${ZONE_ID}
-          record: A
-        - domain: mc.${DOMAIN_0}
-          zone: ${ZONE_ID}
-          record: A
-        - domain: valheim.${DOMAIN_0}
-          zone: ${ZONE_ID}
-          record: A
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                UPDATE_IPV6: false
+                DETECTION_MODE: "dig-whoami.cloudflare"
+                LOG_LEVEL: 3
+                CF_APITOKEN: ${DOMAIN_0_CLOUDFLARE_TOKEN}
+                CF_HOSTS: "${DDNS_URL},mc.${DDNS_URL},valheim.{DDNS_URL}"
+                INTERVAL: 300
