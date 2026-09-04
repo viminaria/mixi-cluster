@@ -38,5 +38,5 @@ spec:
                 DETECTION_MODE: "dig-whoami.cloudflare"
                 LOG_LEVEL: 3
                 CF_APITOKEN: ${DOMAIN_0_CLOUDFLARE_TOKEN}
-                CF_HOSTS: "${DDNS_URL},mc.${DDNS_URL},valheim.{DDNS_URL}"
+                CF_HOSTS: "${DDNS_URL},mc.${DDNS_URL},valheim.${DDNS_URL}"
                 INTERVAL: 300
