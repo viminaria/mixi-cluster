@@ -46,5 +46,5 @@ spec:
       backups:
         enabled: true
         type: nfs
-        path: ${VALHEIM_BACKUP_PATH}
+        path: ${VALHEIM_BACKUPS_PATH}
         server: ${PROXMOX_IP}
