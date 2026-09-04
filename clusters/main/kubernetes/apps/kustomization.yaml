@@ -19,3 +19,4 @@ resources:
   - home-assistant/ks.yaml
   - valkey/ks.yaml
   - n8n/ks.yaml
+  - valheim/ks.yaml
