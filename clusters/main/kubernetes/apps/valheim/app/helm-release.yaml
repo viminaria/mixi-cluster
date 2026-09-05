@@ -48,3 +48,9 @@ spec:
         type: nfs
         path: ${VALHEIM_BACKUPS_PATH}
         server: ${PROXMOX_IP}
+    workload:
+      valheim:
+        resources:
+          limits:
+            cpu: 4000m
+            memory: 8Gi
