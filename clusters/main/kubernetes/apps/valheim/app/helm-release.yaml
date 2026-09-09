@@ -50,6 +50,7 @@ spec:
         server: ${PROXMOX_IP}
     workload:
       valheim:
+        enabled: true
         resources:
           limits:
             cpu: 4000m
