@@ -57,6 +57,7 @@ spec:
                 SERVER_NAME: Viminaria
                 SERVER_PASS: nakki
                 ADMINLIST_IDS: V_76561198035557270
+                SERVER_ARGS: "-modifier deathpenalty casual -modifier resources more"
               resources:
                 limits:
                   cpu: 6000m
