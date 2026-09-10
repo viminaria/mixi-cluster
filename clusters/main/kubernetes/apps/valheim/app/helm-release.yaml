@@ -56,7 +56,8 @@ spec:
               env:
                 SERVER_NAME: Viminaria
                 SERVER_PASS: nakki
-                SERVER_ARGS: "--modifier deathpenalty casual"
+                SERVER_ARGS:
+                  - -modifier deathpenalty casual
               resources:
                 limits:
                   cpu: 6000m
