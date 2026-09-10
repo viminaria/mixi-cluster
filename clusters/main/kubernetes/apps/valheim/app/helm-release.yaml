@@ -48,7 +48,16 @@ spec:
         type: nfs
         path: ${VALHEIM_BACKUPS_PATH}
         server: ${PROXMOX_IP}
-    resources:
-      limits:
-        cpu: 6000m
-        memory: 8Gi
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                SERVER_NAME: Viminaria
+                SERVER_PASS: nakki
+                SERVER_ARGS: -modifier deathpenalty casual
+              resources:
+                limits:
+                  cpu: 6000m
+                  memory: 8Gi
