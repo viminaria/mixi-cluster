@@ -31,7 +31,7 @@ spec:
     image:   
       repository: ghcr.io/blakeblackshear/frigate
       pullPolicy: IfNotPresent
-      tag: 0.17.2-tensorrt@sha256:8a364092b03561b9c08ac00730206e363a53d07ea0304f7d543b403b65432b5e
+      tag: 0.18.0-tensorrt@sha256:82d7475ba7e5f950911bd9d06f2392de96881f39eeacd78824a526dde9b5cad9
     global:
       stopAll: false
     securityContext:
