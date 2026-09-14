@@ -19,6 +19,11 @@
       "matchDataSources": ["docker", "helm"],
       "matchPackagePatterns": ["minio", "postgresql", "reloader"],
       "schedule": ["at any time"]
+    },
+    {
+    "description": ["Maintenance window for game server charts"],
+    "matchPackagePatterns": ["minecraft", "valheim"],
+    "schedule": ["after 1am and before 5am"]
     }
   ]
 }
