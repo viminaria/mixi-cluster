@@ -6,7 +6,7 @@ metadata:
   namespace: llmkube-system
 spec:
   modelRef: qwen3-6-35b-a3b-mtp
-  image: ghcr.io/ggml-org/llama.cpp:server-cuda12-b9544
+  image: ghcr.io/ggml-org/llama.cpp:server-cuda12-b10991
   runtimeClassName: nvidia
   podSecurityContext:
     runAsUser: 1000
@@ -16,7 +16,7 @@ spec:
     - --n-gpu-layers
     - "60"
     - --mmproj
-    - /models/mmproj.gguf
+    - /models/mmproj-bf16.gguf
     - --no-mmproj-offload
     - --image-min-tokens
     - "1024"
@@ -31,7 +31,7 @@ spec:
     - --tools
     - all
     - --temp
-    - "0.9"
+    - "1.0"
     - --top-p
     - "0.95"
     - --top-k
@@ -41,7 +41,7 @@ spec:
     - --presence-penalty
     - "1.5"
     - --repeat-penalty
-    - "1.0"
+    - "1.05"
     - --fit
     - off
     - --spec-type
