@@ -16,7 +16,7 @@ spec:
     - --n-gpu-layers
     - "60"
     - --mmproj
-    - /models/mmproj-bf16.gguf
+    - /models/mmproj.gguf
     - --no-mmproj-offload
     - --image-min-tokens
     - "1024"
