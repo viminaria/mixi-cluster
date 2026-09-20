@@ -1,14 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-configMapGenerator:
-  - name: grafana-dashboards
-    namespace: grafana
-    files:
-      - dashboards/pod-logs.json
-    labels:
-      grafana_dashboard: "1"
 resources:
   - namespace.yaml
   - helm-release.yaml
   - loki-datasource.yaml
+  - dashboards-configmap.yaml
 
