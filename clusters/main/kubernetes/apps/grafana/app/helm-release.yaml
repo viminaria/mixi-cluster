@@ -38,6 +38,8 @@ spec:
             main:
               env:
                 GF_SERVER_DOMAIN: "grafana.${DOMAIN_0}"
+                GF_SECURITY_ADMIN_USER: ${GF_ADMIN}
+                GF_SECURITY_ADMIN_PASSWORD: ${GF_PWD}
     ingress:
       main:
         enabled: true
