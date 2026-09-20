@@ -5,4 +5,3 @@ resources:
   - helm-release.yaml
   - loki-datasource.yaml
   - dashboards/logs-lens.yaml
-  - dashboards/pod-logs-dashboard.yaml
