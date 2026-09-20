@@ -50,7 +50,9 @@ spec:
     - "3"
     - --spec-draft-p-min
     - "0.55"
-  replicas: 2
+    - --preserve-thinking
+    - on
+  replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
   contextSize: 131072
