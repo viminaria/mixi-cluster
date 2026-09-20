@@ -4,5 +4,5 @@ resources:
   - namespace.yaml
   - helm-release.yaml
   - loki-datasource.yaml
-  - dashboards-configmap.yaml
+  - dashboards/
 
