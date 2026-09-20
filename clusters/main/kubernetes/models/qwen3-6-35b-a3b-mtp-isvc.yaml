@@ -50,8 +50,7 @@ spec:
     - "3"
     - --spec-draft-p-min
     - "0.55"
-    - --preserve-thinking
-    - on
+    - --reasoning-preserve
   replicas: 1
   cacheTypeK: q4_0
   cacheTypeV: q4_0
