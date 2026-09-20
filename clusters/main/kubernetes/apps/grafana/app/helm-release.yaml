@@ -29,6 +29,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    sidecars:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
     global:
       stopAll: false
     workload:
