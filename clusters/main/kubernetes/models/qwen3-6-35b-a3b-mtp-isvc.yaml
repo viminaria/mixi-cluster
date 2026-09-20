@@ -50,10 +50,10 @@ spec:
     - "3"
     - --spec-draft-p-min
     - "0.55"
-  replicas: 1
+  replicas: 2
   cacheTypeK: q4_0
   cacheTypeV: q4_0
-  contextSize: 262144
+  contextSize: 131072
   flashAttention: true
   resources:
     gpu: 2
