@@ -31,7 +31,7 @@ spec:
     - --tools
     - all
     - --temp
-    - "1.0"
+    - "0.9"
     - --top-p
     - "0.95"
     - --top-k
@@ -41,7 +41,7 @@ spec:
     - --presence-penalty
     - "1.5"
     - --repeat-penalty
-    - "1.05"
+    - "1.0"
     - --fit
     - off
     - --spec-type
@@ -51,9 +51,11 @@ spec:
     - --spec-draft-p-min
     - "0.55"
     - --reasoning-preserve
+    - -b
+    - "2048"
   replicas: 1
-  cacheTypeK: q4_0
-  cacheTypeV: q4_0
+  cacheTypeK: q8_0
+  cacheTypeV: q8_0
   contextSize: 131072
   flashAttention: true
   resources:
