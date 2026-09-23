@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
-  - searxng/ks.yaml
+  # - searxng/ks.yaml
   - wg-easy/ks.yaml
   - cloudflareddns/ks.yaml
   - borealis/ks.yaml
