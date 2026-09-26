@@ -82,10 +82,6 @@ spec:
             targets    = discovery.relabel.pod_logs.output
             forward_to = [loki.write.loki.receiver]
 
-            processing.stage.vrl {
-              expression = ".message = .message.extract(r'^(?:\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}(?:[.,]\\d+)?(?:Z|[+-]\\d{2}:?\\d{2})?|[\w]+ \\w+ +\\d+\\s+\\d{2}:\\d{2}:\\d{2}|^\\[[A-Z]+\\] \\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}:\\d{2}(?:[.,]\\d+)?(?:Z|[+-]\\d{2}:?\\d{2})?)', \"g\")"
-            }
-
             file_match {
               enabled = true
             }
