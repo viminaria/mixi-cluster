@@ -52,9 +52,9 @@ spec:
         podSpec:
           containers:
             main:
-              env:
-                NEXT_PUBLIC_OLLAMA_ENDPOINT_URL: ollama.ollama-api.svc.cluster.local:11434
-                OLLAMA_MODEL: phi4-mini:latest
+              # env:
+              #   NEXT_PUBLIC_OLLAMA_ENDPOINT_URL: ollama.ollama-api.svc.cluster.local:11434
+              #   OLLAMA_MODEL: phi4-mini:latest
               resources:
                 limits:
                   cpu: 4000m
