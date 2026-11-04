@@ -21,3 +21,4 @@ resources:
   - n8n/ks.yaml
   # - valheim/ks.yaml
   - vikunja/ks.yaml
+  - linkwarden/ks.yaml
