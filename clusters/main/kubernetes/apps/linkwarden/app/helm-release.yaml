@@ -53,9 +53,8 @@ spec:
           containers:
             main:
               env:
-                CUSTOM_OPENAI_BASE_URL: qwen3-6-35b-a3b-mtp.llmkube-system.svc.cluster.local:8080
-                OPENAI_MODEL: qwen3.6-35b-a3b
-                OPENAI_API_KEY: ""
+                NEXT_PUBLIC_OLLAMA_ENDPOINT_URL: ollama.ollama-api.svc.cluster.local:11434
+                OLLAMA_MODEL: phi4-mini:latest
               resources:
                 limits:
                   cpu: 4000m
