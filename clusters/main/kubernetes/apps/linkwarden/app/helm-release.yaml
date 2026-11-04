@@ -47,3 +47,13 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              resources:
+                limits:
+                  cpu: 4000m
+                  memory: 8Gi
+ 
