@@ -4,4 +4,4 @@ resources:
   - namespace.yaml
   - helm-release.yaml
   - loki-datasource.yaml
-  - dashboards/logs-lens.yaml
+  - dashboards/
