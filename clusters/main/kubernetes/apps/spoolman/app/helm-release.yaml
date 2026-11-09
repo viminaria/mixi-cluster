@@ -41,9 +41,6 @@ spec:
               env:
                 SPOOLMAN_DIR_DATA: "{{ .Values.persistence.data.path }}"
                 SPOOLMAN_DIR_LOGS: "{{ .Values.persistence.logs.path }}"
-        ports:
-          main:
-            port: 8000
     ingress:
       main:
         enabled: true
