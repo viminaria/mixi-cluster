@@ -35,12 +35,11 @@ spec:
         runAsGroup: 0
     service:
       main:
-        podSpec:
-          containers:
-            main:
-              env:
-                SPOOLMAN_DIR_DATA: "{{ .Values.persistence.data.path }}"
-                SPOOLMAN_DIR_LOGS: "{{ .Values.persistence.logs.path }}"
+        containers:
+          main:
+            env:
+              SPOOLMAN_DIR_DATA: "{{ .Values.persistence.data.path }}"
+              SPOOLMAN_DIR_LOGS: "{{ .Values.persistence.logs.path }}"
         ports:
           main:
             port: 8000
