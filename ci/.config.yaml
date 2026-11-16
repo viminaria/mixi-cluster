@@ -1,0 +1,13 @@
+---
+skipList:
+  - apps/wg-easy
+  - apps/minecraft-java
+  - apps/minecraft-router
+  - apps/valheim
+
+dummyEnv:
+  TALOS_API: http://localhost:50000
+  TALOS_ENDPOINT: http://localhost:50001
+  SOME_SECRET: dummy_secret_value
+  CLUSTER_DOMAIN: localhost
+  API_TOKEN: dummy_token_12345

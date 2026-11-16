@@ -1,0 +1,43 @@
+---
+# renovate: dataSource=docker depName=ghcr.io/renovatebot/renovate
+name: Renovate Labels
+labels:
+  - name: "automerge"
+    description: "Allow automerging of this PR"
+    color: "0e8a16"
+
+  - name: "type/major"
+    description: "Major version update"
+    color: "d73a4a"
+
+  - name: "type/minor"
+    description: "Minor version update"
+    color: "a2eeef"
+
+  - name: "type/patch"
+    description: "Patch version update"
+    color: "bfe5bf"
+
+  - name: "type/digest"
+    description: "Digest update"
+    color: "fbca04"
+
+  - name: "type/pin"
+    description: "Pin or pinDigest update"
+    color: "c2e0c6"
+
+  - name: "system-upgrade"
+    description: "Talos system upgrade dependency"
+    color: "d73a4a"
+
+  - name: "fluxcd-update"
+    description: "Flux controller update"
+    color: "0075ca"
+
+  - name: "renovate/helm"
+    description: "Helm chart update from Renovate"
+    color: "1d76db"
+
+  - name: "renovate/container"
+    description: "Container image update from Renovate"
+    color: "1d76db"

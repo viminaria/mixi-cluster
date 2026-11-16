@@ -1,0 +1,23 @@
+---
+# renovate: dataSource=docker depName=ghcr.io/renovatebot/renovate
+type/major:
+  - "**/*"
+
+type/minor:
+  - "**/*"
+
+type/patch:
+  - "**/*"
+
+type/digest:
+  - "**/*"
+
+type/pin:
+  - "**/*"
+
+automerge:
+  - "renovate/**"
+  - ".github/workflows/**"
+
+system-upgrade:
+  - "**/helm-release.yaml"
