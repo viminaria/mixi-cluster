@@ -6,11 +6,13 @@ metadata:
 resources:
   - bjw-s.yaml
   - cloudnative-pg.yaml
+  - cilium
   - home-ops-mirror.yaml
-  - home-operations.yaml
   - jetstack.yaml
   - kustomization.yaml
   - metallb.yaml
+  - node-feature-discovery.yaml
+  - ingress-nginx.yaml
   - prometheus-community.yaml
   - spegel.yaml
   - truecharts.yaml

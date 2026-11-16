@@ -3,9 +3,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: openebs
+  name: ingress-nginx
   namespace: flux-system
 spec:
   type: oci
   interval: 2h
-  url: oci://ghcr.io/openebs/charts
+  url: oci://registry.k8s.io/ingress-nginx/charts
