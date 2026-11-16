@@ -28,65 +28,59 @@ jobs:
             "${{ github.event.pull_request.base.sha }}" \
             "${{ github.sha }}" \
             --name-only | grep 'helm-release.yaml$' || true)
-          
+
           if [ -z "$files" ]; then
             echo "🔍 No HelmReleases changed"
             echo "matrix=[]" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          
+
           echo "🔍 Detected HelmReleases:"
           printf '%s\n' "$files"
-          
-          # --------------------------------------------------
-          # Filter releases using YAML skip list
-          # --------------------------------------------------
-
-          mapfile -t files_array <<< "$files"
-
-          filtered=()
-          skipped=()
 
           SKIP_FILE="ci/.config.yaml"
-
           if [ -f "$SKIP_FILE" ]; then
-            mapfile -t skip_list < <(yq -r '.skipList[]' "$SKIP_FILE")
+            skip_list=$(yq -r '.skipList[]' "$SKIP_FILE" 2>/dev/null || true)
           else
-            skip_list=()
+            skip_list=""
           fi
 
-          for file in "${files_array[@]}"; do
+          filtered=""
+          skipped=""
+
+          while IFS= read -r file; do
             dir=$(dirname "$file")
-            skip=false
+            is_skipped=false
 
-            for skip_entry in "${skip_list[@]}"; do
-              if [ "$dir" = "$skip_entry" ]; then
-                skip=true
-                break
-              done
-            done
+            if [ -n "$skip_list" ]; then
+              while IFS= read -r skip_entry; do
+                if [ "$dir" = "$skip_entry" ]; then
+                  is_skipped=true
+                  break
+                fi
+              done <<< "$skip_list"
+            fi
 
-            if [ "$skip" = true ]; then
-              skipped+=("$file")
+            if [ "$is_skipped" = true ]; then
+              skipped="${skipped:+${skipped}$'\n'}${file}"
             else
-              filtered+=("$file")
-            done
-          done
-
+              filtered="${filtered:+${filtered}$'\n'}${file}"
+            fi
+          done <<< "$files"
 
           echo ""
           echo "===== HelmRelease CI scan result ====="
 
-          if [ ${#skipped[@]} -gt 0 ]; then
+          if [ -n "$skipped" ]; then
             echo "⏭️ Skipped:"
-            printf '  - %s\n' "${skipped[@]}"
+            printf '  - %s\n' $skipped
           else
             echo "⏭️ Skipped: none"
           fi
 
-          if [ ${#filtered[@]} -gt 0 ]; then
+          if [ -n "$filtered" ]; then
             echo "🧪 To test:"
-            printf '  - %s\n' "${filtered[@]}"
+            printf '  - %s\n' $filtered
           else
             echo "🧪 To test: none"
           fi
@@ -98,15 +92,15 @@ jobs:
             echo "## HelmRelease CI result"
             echo ""
             echo "### ⏭️ Skipped"
-            if [ ${#skipped[@]} -gt 0 ]; then
-              printf -- "- %s\n" "${skipped[@]}"
+            if [ -n "$skipped" ]; then
+              printf -- "- %s\n" $skipped
             else
               echo "_none_"
             fi
             echo ""
             echo "### 🧪 To test"
-            if [ ${#filtered[@]} -gt 0 ]; then
-              printf -- "- %s\n" "${filtered[@]}"
+            if [ -n "$filtered" ]; then
+              printf -- "- %s\n" $filtered
             else
               echo "_none_"
             fi
@@ -117,12 +111,12 @@ jobs:
           tested_list="_none_"
           skipped_list="_none_"
 
-          if [ ${#filtered[@]} -gt 0 ]; then
-            tested_list=$(printf '%s\n' "${filtered[@]}")
+          if [ -n "$filtered" ]; then
+            tested_list="$filtered"
           fi
 
-          if [ ${#skipped[@]} -gt 0 ]; then
-            skipped_list=$(printf '%s\n' "${skipped[@]}")
+          if [ -n "$skipped" ]; then
+            skipped_list="$skipped"
           fi
 
           {
@@ -139,12 +133,12 @@ jobs:
 
           # ---------- Matrix handling ----------
 
-          if [ ${#filtered[@]} -eq 0 ]; then
+          if [ -z "$filtered" ]; then
             echo "matrix=[]" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          json=$(printf '%s\n' "${filtered[@]}" | jq -R . | jq -s .)
+          json=$(printf '%s\n' $filtered | jq -R . | jq -s .)
 
           {
             echo "matrix<<EOF"

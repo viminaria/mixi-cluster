@@ -8,6 +8,5 @@ echo "Validating Kubernetes manifests in: ${kubernetes_dir}"
 kubeconform \
   -strict \
   -summary \
-  -all-comments-enabled \
   -ignore-missing-schemas \
   "${kubernetes_dir}"
