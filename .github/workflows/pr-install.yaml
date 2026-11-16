@@ -195,7 +195,7 @@ jobs:
         uses: azure/setup-kubectl@bda439f5f36b99b262ebdcd3613869bddb064c8e # v5
 
       - name: Install helm
-        uses: azure/setup-helm@2f5e7bc67f1f9972ab16657bb795f36b99b262ebdcd3613869bddb064c8e # v5.1.0
+        uses: azure/setup-helm@2f5e7bc67f1f9972ab16657bb795f36d8f04de0e # v5.1.0
         with:
           version: v4.3.2
 
