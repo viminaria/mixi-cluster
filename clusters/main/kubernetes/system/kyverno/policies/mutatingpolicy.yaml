@@ -1,0 +1,41 @@
+---
+apiVersion: policies.kyverno.io/v1
+kind: MutatingPolicy
+metadata:
+  name: inject-mmproj-downloader
+spec:
+  evaluation:
+    background:
+      enabled: false
+  matchConstraints:
+    objectSelector:
+      matchLabels:
+        inference.llmkube.dev/model: qwen3-6-35b-a3b-mtp
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE"]
+        resources: ["pods"]
+  mutations:
+    - patchType: ApplyConfiguration
+      applyConfiguration:
+        expression: |-
+          Object{
+            spec: Object{
+              initContainers: [
+                Object{
+                  name: "mmproj-downloader",
+                  image: "curlimages/curl:latest",
+                  command: ["sh", "-c", "curl -f --retry 3 --retry-delay 5 -L -o /models/mmproj.gguf https://huggingface.co/byteshape/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/mmproj-bf16.gguf"],
+                  securityContext: Object{
+                    allowPrivilegeEscalation: false,
+                    readOnlyRootFilesystem: false,
+                    runAsUser: 1000,
+                    runAsGroup: 1000,
+                    capabilities: Object{drop: ["ALL"]}
+                  },
+                  volumeMounts: [Object{name: "model-cache", mountPath: "/models"}]
+                }
+              ]
+            }
+          }
