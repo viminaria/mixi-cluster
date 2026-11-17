@@ -30,8 +30,6 @@ spec:
   values:
     global:
       stopAll: false
-    securityContext:
-      privileged: true
     homeassistant:
       trusted_proxies:
         - 172.16.0.0/16
