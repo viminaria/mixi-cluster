@@ -4,6 +4,7 @@
     "config:recommended",
     "github>trueforge-org/truecharts//.github/renovate/main.json5",
     "github>viminaria/mixi-cluster//.github/custom.json5",
-    "github>viminaria/mixi-cluster//.github/kubectl.json5"
+    "github>viminaria/mixi-cluster//.github/kubectl.json5",
+    "github>viminaria/mixi-cluster//.github/wg-easy.json5"
   ]
 }

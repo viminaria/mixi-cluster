@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": ["Block automerge for wg-easy minor"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false,
+      "matchPackageNames": ["truecharts/wg-easy"],
+      "labels": ["type/minor"],
+      "addLabels": null
+    },
+    {
+      "description": ["Block automerge for wg-easy major"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "matchPackageNames": ["truecharts/wg-easy"],
+      "labels": ["type/major"],
+      "addLabels": null
+    }
+  ]
+}
